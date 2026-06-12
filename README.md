@@ -90,6 +90,30 @@ Each step writes traceable artifacts under `raw/`, `handoffs/`, `wiki/`, or `mai
 
 The Wiki Builder Agent writes wiki pages through MCP `wiki.write_page`. Final Review uses MCP `schema.validate`. Existing page edits, archives, and duplicate merges can also be performed through MCP write tools.
 
+## Spec-Based Agent Pool
+
+Game information is fragmented across official sites, stores, review outlets, community reactions, and gameplay references. This project therefore uses a source-oriented agent pool instead of one generic search agent.
+
+The MVP does not spawn parallel LLM workers or require an API key. `tools/skill-runner.js` applies these agent specs sequentially:
+
+- `Research Orchestrator`
+- `Official Source Agent`
+- `Storefront Agent`
+- `Critic Review Agent`
+- `Community Agent`
+- `Gameplay Evidence Agent`
+- `Cross-Check Agent`
+- `Synthesis Agent`
+
+The design is documented in:
+
+- `docs/research-source-policy.md`
+- `docs/multi-source-research-pipeline.md`
+- `agents/source-pool/`
+- `schemas/evidence.schema.json`
+
+Each analysis run writes `handoffs/{game_slug}/02-source-agent-pool.json`, and generated game pages expose `source_agents`, `source_coverage`, and `trust_flags` in frontmatter. The viewer renders these as Evidence Coverage and Trust Flag cards so the user can see whether official/store/community/reference evidence is present.
+
 New game pages also include an analysis quality section. The Quality Reviewer Agent writes:
 
 - `handoffs/{slug}/08-quality-report.json`

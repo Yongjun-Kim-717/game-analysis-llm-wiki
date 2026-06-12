@@ -16,15 +16,33 @@ Use this skill when the user wants to add a new game analysis page from a game n
 ## Pipeline
 
 1. Title Resolver normalizes the user query into a canonical title and aliases.
-2. Research Agent builds scoped source targets, records user-provided sources and notes, and fetches public no-key sources when possible.
-3. Source Organizer Agent separates official/store sources, reference sources, player-experience sources, and user notes.
-4. Evidence Reviewer Agent assigns fact and player-experience evidence levels.
-5. Game Analyst Agent infers core loop, mechanics, tags, and fun factor hypothesis.
-6. Quality Reviewer Agent calculates `quality_score`, `quality_level`, and Core Loop confidence.
-7. Wiki Builder Agent writes evidence and game pages through MCP `wiki.write_page`.
-8. Final Review Agent calls MCP `schema.validate`.
-9. Revision Agent writes `07-revision-plan.json` when the page needs more evidence or schema repair.
-10. Maintenance Agent appends `journal.md`.
+2. Research Orchestrator selects source agents from the spec-based agent pool.
+3. Official Source Agent, Storefront Agent, Critic Review Agent, Community Agent, and Gameplay Evidence Agent each handle their own source type.
+4. Research Agent builds scoped source targets, records user-provided sources and notes, and fetches public no-key sources when possible.
+5. Source Organizer Agent separates official/store sources, reference sources, player-experience sources, and user notes.
+6. Cross-Check Agent records evidence coverage, trust flags, and missing source groups.
+7. Evidence Reviewer Agent assigns fact and player-experience evidence levels.
+8. Game Analyst Agent infers core loop, mechanics, tags, and fun factor hypothesis.
+9. Synthesis Agent prepares source perspectives for the wiki page.
+10. Quality Reviewer Agent calculates `quality_score`, `quality_level`, and Core Loop confidence.
+11. Wiki Builder Agent writes evidence and game pages through MCP `wiki.write_page`.
+12. Final Review Agent calls MCP `schema.validate`.
+13. Revision Agent writes `07-revision-plan.json` when the page needs more evidence or schema repair.
+14. Maintenance Agent appends `journal.md`.
+
+## Spec-Based Agent Pool
+
+The MVP does not spawn parallel LLM workers. To control cost, `skill-runner` applies the source agent specifications sequentially and writes a trace to:
+
+- `handoffs/{game_slug}/02-source-agent-pool.json`
+
+The generated game page frontmatter includes:
+
+- `source_agents`
+- `source_coverage`
+- `trust_flags`
+
+This makes the pipeline upgradeable to real worker agents later without changing the wiki schema.
 
 ## Player Review Handling
 

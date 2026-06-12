@@ -382,7 +382,10 @@ function pageToSummary(page, query = "") {
     status: page.metadata.status || "",
     evidence_level: page.metadata.evidence_level || "",
     quality_score: page.metadata.quality_score ?? "",
-    quality_level: page.metadata.quality_level || ""
+    quality_level: page.metadata.quality_level || "",
+    source_coverage: Array.isArray(page.metadata.source_coverage) ? page.metadata.source_coverage : [],
+    source_agents: Array.isArray(page.metadata.source_agents) ? page.metadata.source_agents : [],
+    trust_flags: Array.isArray(page.metadata.trust_flags) ? page.metadata.trust_flags : []
   };
 }
 

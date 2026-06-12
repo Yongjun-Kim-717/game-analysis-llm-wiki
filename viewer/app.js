@@ -356,15 +356,16 @@ function readSkillForm() {
 
 function renderRunning(payload) {
   const steps = [
-    "Research Agent",
-    "Source Organizer Agent",
-    "Evidence Reviewer Agent",
-    "Game Analyst Agent",
+    "Research Orchestrator",
+    "Official Source Agent",
+    "Storefront Agent",
+    "Community Agent",
+    "Gameplay Evidence Agent",
+    "Cross-Check Agent",
+    "Synthesis Agent",
     "Quality Reviewer Agent",
     "Wiki Builder Agent",
-    "Final Review Agent",
-    "Revision Agent",
-    "Maintenance Agent"
+    "Final Review Agent"
   ];
   skillOutputEl.innerHTML = `
     <div class="run-status">
@@ -433,6 +434,30 @@ function evidenceTone(level) {
   return "fail";
 }
 
+function coverageItems(metadata = {}) {
+  const covered = new Set(listValue(metadata.source_coverage).map((item) => String(item).toLowerCase()));
+  return [
+    ["official", "Official"],
+    ["storefront", "Storefront"],
+    ["reference", "Reference"],
+    ["community", "Community"],
+    ["critic", "Critic"]
+  ].map(([id, label]) => ({ id, label, covered: covered.has(id) }));
+}
+
+function renderCoverageBadges(metadata = {}) {
+  const items = coverageItems(metadata);
+  return `
+    <div class="coverage-strip">
+      ${items.map((item) => `
+        <span class="coverage-badge ${item.covered ? "covered" : "missing"}">
+          <b>${escapeHtml(item.label)}</b>${item.covered ? "covered" : "missing"}
+        </span>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderPageStatus(page, validation = null) {
   const metadata = page.metadata || {};
   const isGame = page.page_type === "game-analysis";
@@ -461,7 +486,10 @@ function renderPageStatus(page, validation = null) {
       ${statusPill("schema", schemaSummary, validationTone(validation))}
       ${statusPill("evidence", metadata.evidence_level || "n/a", evidenceTone(metadata.evidence_level))}
       ${statusPill("quality", quality, qualityTone(metadata))}
+      ${statusPill("coverage", `${listValue(metadata.source_coverage).length || 0}/5`, listValue(metadata.source_coverage).length >= 3 ? "ok" : "warn")}
+      ${statusPill("trust flags", `${listValue(metadata.trust_flags).length || 0}`, listValue(metadata.trust_flags).length ? "warn" : "ok")}
     </div>
+    ${isGame ? renderCoverageBadges(metadata) : ""}
     <div class="pipeline-list compact">
       ${pipelineSteps.map((step, index) => `
         <div class="pipeline-card ${escapeHtml(step[1])}">
@@ -534,6 +562,22 @@ function renderCoreLoopFlow(metadata = {}) {
   `;
 }
 
+function renderEvidenceCoverage(metadata = {}) {
+  const flags = listValue(metadata.trust_flags);
+  return `
+    <section class="analysis-panel">
+      <h2>Evidence Coverage</h2>
+      ${renderCoverageBadges(metadata)}
+      <div class="trust-flags">
+        <strong>Trust Flags</strong>
+        ${flags.length
+          ? flags.slice(0, 4).map((flag) => `<span>${escapeHtml(flag)}</span>`).join("")
+          : "<span>none</span>"}
+      </div>
+    </section>
+  `;
+}
+
 function renderCompareRecommendations(page) {
   const candidates = compareCandidates(page);
   if (!candidates.length) return "";
@@ -583,6 +627,7 @@ function renderPageOverview(page, validation) {
         ${renderMetaBadge("status", metadata.status || summary.status || "draft", "neutral")}
       </div>
       <div class="analysis-grid">
+        ${renderEvidenceCoverage(metadata)}
         ${renderCoreLoopFlow(metadata)}
         ${renderCompareRecommendations(page)}
         ${renderQualityAdvice(metadata)}

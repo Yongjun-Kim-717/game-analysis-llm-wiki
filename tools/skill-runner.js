@@ -335,6 +335,65 @@ const SCOPE_TIERS = {
   broad: ["tier-1", "tier-2", "tier-3", "tier-4"]
 };
 
+const SOURCE_AGENT_POOL = [
+  {
+    id: "research-orchestrator",
+    label: "Research Orchestrator",
+    spec: "agents/source-pool/research-orchestrator.md",
+    sourceKinds: [],
+    required: true
+  },
+  {
+    id: "official-source-agent",
+    label: "Official Source Agent",
+    spec: "agents/source-pool/official-source-agent.md",
+    sourceKinds: ["official", "official-search", "press-search"],
+    required: true
+  },
+  {
+    id: "storefront-agent",
+    label: "Storefront Agent",
+    spec: "agents/source-pool/storefront-agent.md",
+    sourceKinds: ["store"],
+    required: true
+  },
+  {
+    id: "critic-review-agent",
+    label: "Critic Review Agent",
+    spec: "agents/source-pool/critic-review-agent.md",
+    sourceKinds: ["review-search"],
+    required: false
+  },
+  {
+    id: "community-agent",
+    label: "Community Agent",
+    spec: "agents/source-pool/community-agent.md",
+    sourceKinds: ["user-review", "reaction"],
+    required: false
+  },
+  {
+    id: "gameplay-evidence-agent",
+    label: "Gameplay Evidence Agent",
+    spec: "agents/source-pool/gameplay-evidence-agent.md",
+    sourceKinds: ["reference", "reference-search", "database-search", "user-note"],
+    required: true
+  },
+  {
+    id: "cross-check-agent",
+    label: "Cross-Check Agent",
+    spec: "agents/source-pool/cross-check-agent.md",
+    sourceKinds: [],
+    required: true
+  },
+  {
+    id: "synthesis-agent",
+    label: "Synthesis Agent",
+    spec: "agents/source-pool/synthesis-agent.md",
+    sourceKinds: [],
+    required: true
+  }
+];
+
 function tierForUrl(url) {
   const lower = String(url).toLowerCase();
   if (/steam|playstation|xbox|nintendo|epicgames|gog|official|press|developer|publisher/.test(lower)) return "tier-1";
@@ -350,6 +409,101 @@ function kindForUrl(url) {
   if (/wiki|igdb|mobygames|giantbomb|fandom/.test(lower)) return "reference";
   if (/youtube|review|reddit|community|blog/.test(lower)) return "reaction";
   return "source";
+}
+
+function sourceAgentForSource(source) {
+  return SOURCE_AGENT_POOL.find((agent) => agent.sourceKinds.includes(source.kind)) || null;
+}
+
+function sourceCoverageFor(research) {
+  const confirmed = (source) => ["fetched", "user-provided", "provided"].includes(source.status);
+  const byAgent = {};
+  for (const agent of SOURCE_AGENT_POOL) {
+    const sources = agent.sourceKinds.length
+      ? research.sources.filter((source) => agent.sourceKinds.includes(source.kind))
+      : [];
+    byAgent[agent.id] = {
+      label: agent.label,
+      spec: agent.spec,
+      required: agent.required,
+      sources: sources.length,
+      confirmed_sources: sources.filter(confirmed).length,
+      fetched_sources: sources.filter((source) => source.status === "fetched").length,
+      candidate_sources: sources.filter((source) => source.status === "candidate").length,
+      claims: research.claims.filter((claim) => sources.some((source) => source.id === claim.source_id)).length
+    };
+  }
+  const coverage = {
+    official: byAgent["official-source-agent"].confirmed_sources > 0,
+    storefront: byAgent["storefront-agent"].confirmed_sources > 0,
+    reference: byAgent["gameplay-evidence-agent"].confirmed_sources > 0,
+    community: byAgent["community-agent"].claims > 0 || byAgent["community-agent"].confirmed_sources > 0,
+    critic: byAgent["critic-review-agent"].confirmed_sources > 0
+  };
+  const flags = [];
+  if (!coverage.official && !coverage.storefront) flags.push("needs-official-or-store-source");
+  if (!coverage.community) flags.push("needs-player-experience-signal");
+  if (!coverage.reference) flags.push("needs-reference-or-gameplay-evidence");
+  if (research.sources.some((source) => source.status === "candidate")) flags.push("candidate-sources-present");
+  return { byAgent, coverage, flags };
+}
+
+function buildAgentPoolTrace({ research, scope, includeReviews }) {
+  const coverage = sourceCoverageFor(research);
+  const selectedAgents = SOURCE_AGENT_POOL.filter((agent) => {
+    if (agent.required) return true;
+    if (agent.id === "community-agent") return includeReviews || scope === "broad" || coverage.byAgent[agent.id].sources > 0;
+    if (agent.id === "critic-review-agent") return scope === "broad" || coverage.byAgent[agent.id].sources > 0;
+    return coverage.byAgent[agent.id].sources > 0;
+  });
+  const steps = selectedAgents.map((agent) => {
+    const metrics = coverage.byAgent[agent.id] || {};
+    let status = "completed";
+    if (agent.sourceKinds.length && metrics.confirmed_sources === 0 && metrics.claims === 0) status = "candidate-only";
+    if (agent.id === "community-agent" && !coverage.coverage.community) status = "needs-player-signal";
+    if (agent.id === "cross-check-agent" && coverage.flags.length) status = "needs-review";
+    if (agent.id === "synthesis-agent") status = "completed";
+    if (agent.id === "research-orchestrator") status = "completed";
+    return {
+      id: agent.id,
+      agent: agent.label,
+      spec: agent.spec,
+      status,
+      summary: summaryForAgent(agent.id, metrics, coverage.flags),
+      metrics
+    };
+  });
+  return {
+    agent_pool: "Spec-Based Agent Pool",
+    execution_mode: "sequential-local-runner",
+    cost_strategy: "No parallel LLM calls; skill-runner applies source agent specs in sequence.",
+    selected_agents: selectedAgents.map((agent) => agent.id),
+    skipped_agents: SOURCE_AGENT_POOL.filter((agent) => !selectedAgents.includes(agent)).map((agent) => ({
+      id: agent.id,
+      reason: "Not required for current scope or no matching source candidates."
+    })),
+    coverage: coverage.coverage,
+    trust_flags: coverage.flags,
+    steps
+  };
+}
+
+function summaryForAgent(agentId, metrics = {}, flags = []) {
+  if (agentId === "research-orchestrator") return "Resolved title, aliases, scope, and selected source agents.";
+  if (agentId === "cross-check-agent") return flags.length ? `Found ${flags.length} evidence gap(s).` : "No major evidence gap found.";
+  if (agentId === "synthesis-agent") return "Prepared source perspectives for wiki synthesis.";
+  return `${metrics.confirmed_sources || 0} confirmed source(s), ${metrics.candidate_sources || 0} candidate source(s), ${metrics.claims || 0} claim(s).`;
+}
+
+function agentPoolFrontmatter(trace) {
+  return trace.selected_agents || [];
+}
+
+function coverageFrontmatter(trace) {
+  const coverage = trace.coverage || {};
+  return Object.entries(coverage)
+    .filter(([, value]) => value)
+    .map(([key]) => key);
 }
 
 function buildSearchTargets(searchTerms, scope) {
@@ -461,6 +615,8 @@ function addResearchSource(research, source) {
 
 function addResearchClaim(research, sourceId, field, text, confidence = "medium", claimType = "source-backed", extra = {}) {
   if (!text) return null;
+  const source = research.sources.find((item) => item.id === sourceId);
+  const sourceAgent = source ? sourceAgentForSource(source) : null;
   const claim = {
     id: `C${nextNumericId(research.claims, "C")}`,
     source_id: sourceId,
@@ -468,10 +624,13 @@ function addResearchClaim(research, sourceId, field, text, confidence = "medium"
     text: String(text),
     confidence,
     claim_type: claimType,
+    source_agent: sourceAgent?.id || (sourceId === "resolver" ? "research-orchestrator" : "unknown"),
+    source_type: source?.kind || sourceId,
+    evidence_level: source?.tier || "inference",
+    verified_status: source?.status || "untracked",
     ...extra
   };
   research.claims.push(claim);
-  const source = research.sources.find((item) => item.id === sourceId);
   if (source) source.claims.push(claim.id);
   return claim;
 }
@@ -621,6 +780,23 @@ function buildEvidenceMarkdown({ title, slug, research, note, evidenceLevel }) {
   return `---\ntitle: ${title} Sources\npage_type: evidence\nstatus: draft\ntags:\n  - evidence\n  - ${slug}\nlast_reviewed: ${today()}\n---\n\n# ${title} Sources\n\n## 검색 범위\n\n- scope: ${research.scope}\n- allowed tiers: ${research.allowed_tiers.join(", ")}\n- original query: ${research.original_game || research.game}\n- aliases: ${research.aliases.join(", ")}\n\n## 출처\n\n${sourceLines.length ? sourceLines.join("\n") : "- no source records"}\n\n## Claims\n\n${claimLines.length ? claimLines.join("\n") : "- no extracted claims"}\n\n## Raw Note\n\n${note || "추가 메모 없음"}\n\n## Evidence Level\n\n${evidenceLevel}\n\n## 검증 필요 사항\n\n${research.unresolved_questions.map((item) => `- ${item}`).join("\n")}\n`;
 }
 
+function buildEvidenceMarkdownV2({ title, slug, research, note, evidenceLevel, agentPoolTrace }) {
+  const sourceLines = research.sources.map((source) => {
+    const link = source.url ? ` - ${source.url}` : "";
+    const matched = source.matched_query ? ` (matched: ${source.matched_query})` : "";
+    const agent = sourceAgentForSource(source)?.id || "unassigned";
+    return `- [${source.id}] ${source.tier} / ${source.kind} / ${source.status} / ${agent}: ${source.title}${matched}${link}`;
+  });
+  const claimLines = research.claims.map((claim) =>
+    `- ${claim.id}: ${claim.field} = ${claim.text} (${claim.confidence}, ${claim.claim_type}, ${claim.source_id}, ${claim.source_agent || "unknown"})`
+  );
+  const agentLines = (agentPoolTrace?.steps || []).map((step) => `- ${step.agent}: ${step.status} - ${step.summary}`);
+  const coverageLines = Object.entries(agentPoolTrace?.coverage || {}).map(([key, value]) => `- ${key}: ${value ? "covered" : "missing"}`);
+  const trustLines = (agentPoolTrace?.trust_flags || []).map((item) => `- ${item}`);
+
+  return `---\ntitle: ${title} Sources\npage_type: evidence\nstatus: draft\ntags:\n  - evidence\n  - ${slug}\nlast_reviewed: ${today()}\n---\n\n# ${title} Sources\n\n## Search Scope\n\n- scope: ${research.scope}\n- allowed tiers: ${research.allowed_tiers.join(", ")}\n- original query: ${research.original_game || research.game}\n- aliases: ${research.aliases.join(", ")}\n\n## Source Agent Pool\n\n- execution mode: ${agentPoolTrace?.execution_mode || "sequential-local-runner"}\n- cost strategy: ${agentPoolTrace?.cost_strategy || "spec-based sequential run"}\n\n${agentLines.length ? agentLines.join("\n") : "- no agent pool trace"}\n\n## Evidence Coverage\n\n${coverageLines.length ? coverageLines.join("\n") : "- no coverage summary"}\n\n## Trust Flags\n\n${trustLines.length ? trustLines.join("\n") : "- none"}\n\n## Sources\n\n${sourceLines.length ? sourceLines.join("\n") : "- no source records"}\n\n## Claims\n\n${claimLines.length ? claimLines.join("\n") : "- no extracted claims"}\n\n## Raw Note\n\n${note || "no note"}\n\n## Evidence Level\n\n${evidenceLevel}\n\n## Open Verification Items\n\n${research.unresolved_questions.map((item) => `- ${item}`).join("\n") || "- none"}\n`;
+}
+
 function buildGameMarkdown({ title, originalTitle, aliases, slug, genre, platform, evidenceLevel, coreLoop, coreLoopConfidence, mechanics, tags, note, research, qualityReport }) {
   const status = evidenceLevel === "seed" ? "needs-research" : "draft";
   const genreCite = citeClaims(claimsByField(research, "genre"));
@@ -650,6 +826,23 @@ function addUserReactionSections(markdown, research) {
   const line = (claim) => `- ${claim.text} [${claim.source_id}]`;
   const section = `## 유저 반응 요약\n\n### 긍정 반응\n\n${praises.length ? praises.map(line).join("\n") : "- 수집된 긍정 리뷰 claim 없음"}\n\n### 부정 반응\n\n${complaints.length ? complaints.map(line).join("\n") : "- 수집된 부정 리뷰 claim 없음"}\n\n### 혼합 반응\n\n${reviewSignals.length ? reviewSignals.map(line).join("\n") : "- 수집된 혼합 반응 claim 없음"}\n\n## 플레이 경험 관찰\n\n- 유저 반응은 사실 정보가 아니라 플레이 경험 신호로만 사용한다. [inference]\n- 반복적으로 등장하는 반응이 충분하지 않으면 핵심 재미 판단의 confidence를 낮게 둔다.\n\n`;
   return markdown.replace("\n## 근거 자료\n", `\n${section}## 근거 자료\n`);
+}
+
+function addSourceAgentPoolSections(markdown, agentPoolTrace) {
+  if (!agentPoolTrace) return markdown;
+  const agentLines = (agentPoolTrace.steps || []).map((step) =>
+    `- ${step.agent}: ${step.status} - ${step.summary}`
+  );
+  const coverageLines = Object.entries(agentPoolTrace.coverage || {}).map(([key, value]) =>
+    `- ${key}: ${value ? "covered" : "missing"}`
+  );
+  const trustLines = (agentPoolTrace.trust_flags || []).map((item) => `- ${item}`);
+  const section = `## Source Agent Pool\n\n- execution mode: ${agentPoolTrace.execution_mode}\n- cost strategy: ${agentPoolTrace.cost_strategy}\n\n${agentLines.join("\n") || "- no agent trace"}\n\n## Evidence Coverage\n\n${coverageLines.join("\n") || "- no coverage summary"}\n\n## Source Conflicts and Gaps\n\n${trustLines.join("\n") || "- no major conflict or gap detected"}\n\n`;
+  let next = setFrontMatterList(markdown, "source_agents", agentPoolFrontmatter(agentPoolTrace));
+  next = setFrontMatterList(next, "source_coverage", coverageFrontmatter(agentPoolTrace));
+  next = setFrontMatterList(next, "trust_flags", agentPoolTrace.trust_flags || []);
+  if (next.includes("\n## Source Agent Pool\n")) return next;
+  return `${next.trimEnd()}\n\n${section}`;
 }
 
 function evidenceLevelFor(research, note) {
@@ -828,6 +1021,7 @@ export async function analyzeNewGame(input = {}) {
     searchTerms: resolved.searchTerms
   });
   await enrichResearchFromPublicApis(research, resolved.searchTerms, { includeReviews });
+  const agentPoolTrace = buildAgentPoolTrace({ research, scope, includeReviews });
 
   const claimGenres = claimsByField(research, "genre").map((claim) => claim.text);
   const claimPlatforms = claimsByField(research, "platform").map((claim) => claim.text);
@@ -879,6 +1073,7 @@ export async function analyzeNewGame(input = {}) {
 
   writeJson(path.join(ROOT, "raw", "research", `${slug}.json`), research);
   writeJson(path.join(base, "01-research.json"), research);
+  writeJson(path.join(base, "02-source-agent-pool.json"), agentPoolTrace);
   writeJson(path.join(base, "02-source-organized.json"), organized);
   writeJson(path.join(base, "03-evidence-review.json"), reviewed);
   writeJson(path.join(base, "04-analysis.json"), analysis);
@@ -886,7 +1081,7 @@ export async function analyzeNewGame(input = {}) {
   const rawPath = path.join(ROOT, "raw", "requests", `${today()}-${slug}.md`);
   writeText(rawPath, `# ${title} Analysis Request\n\n- original_game: ${resolved.original}\n- canonical_game: ${title}\n- aliases: ${resolved.aliases.join(", ")}\n- created_at: ${today()}\n- sources:\n${sources.map((source) => `  - ${source}`).join("\n") || "  - none"}\n- note: ${note || "none"}\n`);
 
-  const evidenceMarkdown = buildEvidenceMarkdown({ title, slug, research, note, evidenceLevel });
+  const evidenceMarkdown = buildEvidenceMarkdownV2({ title, slug, research, note, evidenceLevel, agentPoolTrace });
   const evidencePath = path.join(ROOT, "wiki", "evidence", `${slug}-sources.md`);
   wikiWritePage({
     path: rel(evidencePath),
@@ -898,7 +1093,7 @@ export async function analyzeNewGame(input = {}) {
   const provisionalValidation = { ok: true, missing_metadata: [], missing_sections: [] };
   let qualityReport = buildQualityReport({ title, research, evidenceLevel, experienceEvidenceLevel, coreLoop, mechanics, validation: provisionalValidation });
   let gameMarkdown = addUserReactionSections(
-    buildGameMarkdown({
+    addSourceAgentPoolSections(buildGameMarkdown({
       title,
       originalTitle: resolved.original,
       aliases: resolved.aliases,
@@ -913,7 +1108,7 @@ export async function analyzeNewGame(input = {}) {
       note: note || descriptionText || summaryText,
       research,
       qualityReport
-    }),
+    }), agentPoolTrace),
     research
   );
   const gamePath = path.join(ROOT, "wiki", "games", `${slug}.md`);
@@ -928,7 +1123,7 @@ export async function analyzeNewGame(input = {}) {
   const validation = schemaValidate({ path: rel(gamePath) });
   qualityReport = buildQualityReport({ title, research, evidenceLevel, experienceEvidenceLevel, coreLoop, mechanics, validation });
   gameMarkdown = addUserReactionSections(
-    buildGameMarkdown({
+    addSourceAgentPoolSections(buildGameMarkdown({
       title,
       originalTitle: resolved.original,
       aliases: resolved.aliases,
@@ -943,7 +1138,7 @@ export async function analyzeNewGame(input = {}) {
       note: note || descriptionText || summaryText,
       research,
       qualityReport
-    }),
+    }), agentPoolTrace),
     research
   );
   wikiWritePage({
@@ -961,7 +1156,14 @@ export async function analyzeNewGame(input = {}) {
 
   appendJournal(`${title} 분석 파이프라인 실행: ${rel(gamePath)} 생성`, "Analyze New Game");
   const researchStatus = fetchedSources.length ? "completed" : "needs-research";
+  const agentPoolPipeline = (agentPoolTrace.steps || []).map((step) => ({
+    agent: step.agent,
+    status: step.status === "candidate-only" ? "needs-research" : step.status,
+    summary: step.summary,
+    metrics: step.metrics
+  }));
   const pipeline = [
+    ...agentPoolPipeline,
     { agent: "Research Agent", status: researchStatus, summary: `Fetched ${fetchedSources.length} sources and collected ${research.claims.length} claims`, metrics: { sources: research.sources.length, fetched_sources: fetchedSources.length, claims: research.claims.length, review_claims: experienceClaims.length } },
     { agent: "Source Organizer Agent", status: "completed", summary: "Grouped fact and player-experience claims", metrics: { fact_claims: research.claims.filter((claim) => claim.claim_type !== "player-experience").length, experience_claims: experienceClaims.length } },
     { agent: "Evidence Reviewer Agent", status: evidenceLevel === "seed" ? "needs-research" : "completed", summary: `fact=${evidenceLevel}, experience=${experienceEvidenceLevel}`, metrics: { fact_evidence_level: evidenceLevel, experience_evidence_level: experienceEvidenceLevel } },
@@ -987,7 +1189,7 @@ export async function analyzeNewGame(input = {}) {
       validation.ok ? "Final Review Agent passed" : "Final Review Agent found missing fields",
       evidenceLevel === "seed" ? "No fetched sources; page marked needs-research" : "Maintenance Agent updated journal"
     ],
-    artifacts: [rawPath, path.join(ROOT, "raw", "research", `${slug}.json`), base, evidencePath, gamePath, path.join(base, "07-revision-plan.json"), path.join(base, "08-quality-report.json"), path.join(base, "09-core-loop-confidence.json")].map(rel),
+    artifacts: [rawPath, path.join(ROOT, "raw", "research", `${slug}.json`), base, path.join(base, "02-source-agent-pool.json"), evidencePath, gamePath, path.join(base, "07-revision-plan.json"), path.join(base, "08-quality-report.json"), path.join(base, "09-core-loop-confidence.json")].map(rel),
     pipeline,
     validation
   };

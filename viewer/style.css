@@ -251,7 +251,7 @@ button:hover,
 
 .analysis-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -336,6 +336,60 @@ button:hover,
   color: #dce4f0;
   font-size: 13px;
   line-height: 1.55;
+}
+
+.coverage-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.coverage-badge {
+  border: 1px solid #3a4252;
+  border-radius: 8px;
+  background: #111722;
+  color: #dce6f5;
+  padding: 7px 8px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.coverage-badge b {
+  display: block;
+  color: #9fb0c7;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.coverage-badge.covered {
+  border-color: #49b675;
+}
+
+.coverage-badge.missing {
+  border-color: #e0b64f;
+  color: #f2d792;
+}
+
+.trust-flags {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  color: #dce4f0;
+  font-size: 13px;
+}
+
+.trust-flags strong {
+  color: #9fb0c7;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.trust-flags span {
+  border: 1px solid #343b49;
+  border-radius: 6px;
+  background: #10131a;
+  padding: 6px 8px;
 }
 
 #page h2 {
