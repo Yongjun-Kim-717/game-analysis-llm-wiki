@@ -1,0 +1,105 @@
+{
+  "agent": "Research Agent",
+  "game": "Into the Breach",
+  "slug": "into-the-breach",
+  "scope": "standard",
+  "allowed_tiers": [
+    "tier-1",
+    "tier-2",
+    "tier-3"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search",
+      "url": "https://store.steampowered.com/search/?term=Into%20the%20Breach",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search",
+      "url": "https://www.google.com/search?q=Into%20the%20Breach+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search",
+      "url": "https://www.google.com/search?q=Into%20the%20Breach+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search",
+      "url": "https://www.google.com/search?q=Into%20the%20Breach+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search",
+      "url": "https://www.mobygames.com/search/?q=Into%20the%20Breach",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "U1",
+      "tier": "user-note",
+      "kind": "user-note",
+      "title": "User Raw Note",
+      "url": "",
+      "status": "provided",
+      "claims": []
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "source_id": "U1",
+      "field": "tag",
+      "text": "roguelite",
+      "confidence": "medium",
+      "claim_type": "user-note"
+    },
+    {
+      "id": "C2",
+      "source_id": "U1",
+      "field": "tag",
+      "text": "turn-based",
+      "confidence": "medium",
+      "claim_type": "user-note"
+    },
+    {
+      "id": "C3",
+      "source_id": "U1",
+      "field": "tag",
+      "text": "risk-reward",
+      "confidence": "medium",
+      "claim_type": "user-note"
+    },
+    {
+      "id": "C4",
+      "source_id": "U1",
+      "field": "raw_note",
+      "text": "Turn-based tactics roguelite focused on grid positioning, perfect information, and risk-reward squad upgrades.",
+      "confidence": "medium",
+      "claim_type": "user-note"
+    }
+  ],
+  "unresolved_questions": [
+    "candidate source의 실제 본문 확인이 필요하다.",
+    "핵심 재미와 차별점은 플레이 관찰 또는 공식 설명으로 보강해야 한다."
+  ]
+}

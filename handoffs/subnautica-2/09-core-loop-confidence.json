@@ -1,0 +1,57 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "실시간 조작 전투",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "전투 보상 선택",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "숙련 기반 반복",
+      "confidence": "low",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "환경 탐색",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "자원 수집",
+      "confidence": "low",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "장비/기지 제작",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "더 위험한 구역으로 확장",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    }
+  ]
+}

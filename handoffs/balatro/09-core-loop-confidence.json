@@ -1,0 +1,53 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "카드/선택지 획득",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "덱 또는 빌드 조정",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "전투/도전 해결",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "런 시작",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "위험과 보상 선택",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "실패 또는 클리어 후 재시도",
+      "confidence": "medium",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    }
+  ]
+}

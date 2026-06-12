@@ -1,0 +1,288 @@
+{
+  "agent": "Research Agent",
+  "game": "Hades",
+  "slug": "hades",
+  "scope": "broad",
+  "allowed_tiers": [
+    "tier-1",
+    "tier-2",
+    "tier-3",
+    "tier-4"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search",
+      "url": "https://store.steampowered.com/search/?term=Hades",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search",
+      "url": "https://www.google.com/search?q=Hades+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search",
+      "url": "https://www.google.com/search?q=Hades+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search",
+      "url": "https://www.google.com/search?q=Hades+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search",
+      "url": "https://www.mobygames.com/search/?q=Hades",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S6",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search",
+      "url": "https://www.google.com/search?q=Hades+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S7",
+      "claims": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10"
+      ],
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store - Hades",
+      "url": "https://store.steampowered.com/app/1145360/",
+      "status": "fetched",
+      "steam_appid": 1145360
+    },
+    {
+      "id": "S8",
+      "claims": [
+        "C11",
+        "C12",
+        "C13"
+      ],
+      "tier": "tier-3",
+      "kind": "reference",
+      "title": "Wikipedia - Hades (video game)",
+      "url": "https://en.wikipedia.org/wiki/Hades_(video_game)",
+      "status": "fetched"
+    },
+    {
+      "id": "R1",
+      "claims": [
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19"
+      ],
+      "tier": "tier-4",
+      "kind": "user-review",
+      "title": "Steam Reviews - Hades",
+      "url": "https://store.steampowered.com/app/1145360/#app_reviews_hash",
+      "status": "fetched",
+      "steam_appid": 1145360,
+      "review_summary": {
+        "total_reviews": 152099,
+        "total_positive": 149688,
+        "total_negative": 2411,
+        "review_score_desc": "Overwhelmingly Positive"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "source_id": "S7",
+      "field": "title",
+      "text": "Hades",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C2",
+      "source_id": "S7",
+      "field": "short_description",
+      "text": "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C3",
+      "source_id": "S7",
+      "field": "genre",
+      "text": "Action",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C4",
+      "source_id": "S7",
+      "field": "genre",
+      "text": "Indie",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C5",
+      "source_id": "S7",
+      "field": "genre",
+      "text": "RPG",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C6",
+      "source_id": "S7",
+      "field": "platform",
+      "text": "windows",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C7",
+      "source_id": "S7",
+      "field": "platform",
+      "text": "mac",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C8",
+      "source_id": "S7",
+      "field": "developer",
+      "text": "Supergiant Games",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C9",
+      "source_id": "S7",
+      "field": "publisher",
+      "text": "Supergiant Games",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C10",
+      "source_id": "S7",
+      "field": "release_date",
+      "text": "Sep 17, 2020",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C11",
+      "source_id": "S8",
+      "field": "summary",
+      "text": "Hades is a 2020 roguelike action role-playing game developed and published by Supergiant Games. It was released for macOS, Nintendo Switch, and Windows on September 17, 2020, following an early access release in December 2018. It was later released for PlayStation 4, PlayStation 5, Xbox One, and Xbox Series X/S in August 2021, and was released for iOS in March 2024 through Netflix Games.",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C12",
+      "source_id": "S8",
+      "field": "tag",
+      "text": "roguelike",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C13",
+      "source_id": "S8",
+      "field": "tag",
+      "text": "action",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C14",
+      "source_id": "R1",
+      "field": "review_sentiment",
+      "text": "Overwhelmingly Positive",
+      "confidence": "medium",
+      "claim_type": "player-experience",
+      "sentiment": "mixed"
+    },
+    {
+      "id": "C15",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "Great soundtrack! What an excellent game once you get the ball rolling. Fantastic energy and keeps you engaged.",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C16",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "I went into Hades with little expectation. I had never played a rogue-lite before, and I wasn’t sure how much I’d like it. I enjoy combat in games, but I prefer turn-based combat, storyline and character development. Nev",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C17",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "Absolutely loved Hades! I already spent 100+ hours on Switch before buying it a second time. Biggest surprise: Progress is cross platform, so I could continue where I stopped. Thank you for that! The artstyle is totally ",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C18",
+      "source_id": "R1",
+      "field": "player_complaint",
+      "text": "Good: - great voice acting - a lot of story - action gameplay Bad: - gets repetitive - slow progress unlocking story/items (everything is so expensive) - Zagreus is [offensive wording omitted] It was definitely fun at ti",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "negative"
+    },
+    {
+      "id": "C19",
+      "source_id": "R1",
+      "field": "experience_signal",
+      "text": "Steam reviews fetched: 20 samples, summary=Overwhelmingly Positive",
+      "confidence": "medium",
+      "claim_type": "player-experience",
+      "sentiment": "mixed"
+    }
+  ],
+  "unresolved_questions": [
+    "핵심 재미와 차별점은 플레이 관찰 또는 공식 설명으로 보강해야 한다."
+  ]
+}

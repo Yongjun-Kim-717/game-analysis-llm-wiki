@@ -1,0 +1,27 @@
+{
+  "agent": "Quality Reviewer Agent",
+  "game": "Into the Breach",
+  "quality_score": 42,
+  "quality_level": "weak",
+  "evidence_level": "low",
+  "experience_evidence_level": "missing",
+  "metrics": {
+    "fetched_sources": 1,
+    "tier_one_sources": 0,
+    "reference_sources": 1,
+    "player_experience_claims": 0,
+    "core_loop_steps": 3,
+    "mechanics": 2,
+    "unresolved_questions": 1,
+    "schema_valid": true
+  },
+  "strengths": [
+    "공개 참고 출처가 있다.",
+    "게임 페이지 스키마 검증을 통과했다."
+  ],
+  "gaps": [
+    "공식/스토어 계열 출처가 부족하다.",
+    "유저 반응/플레이 경험 신호가 없다.",
+    "검증 필요 사항이 남아 있다."
+  ]
+}

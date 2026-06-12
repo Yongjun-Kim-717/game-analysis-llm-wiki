@@ -1,0 +1,12 @@
+{
+  "agent": "Research Agent",
+  "game": "Balatro",
+  "slug": "balatro",
+  "sources": [
+    "https://store.steampowered.com/app/2379780/Balatro/"
+  ],
+  "raw_note": "Poker roguelike deckbuilder with joker synergies and score-based run progression.",
+  "limitations": [
+    "URL content is not fetched in the no-API-key MVP. User-provided sources are stored for review."
+  ]
+}

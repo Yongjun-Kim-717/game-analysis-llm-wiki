@@ -1,0 +1,482 @@
+{
+  "agent": "Research Agent",
+  "game": "Subnautica 2",
+  "original_game": "서브나우티카2",
+  "aliases": [
+    "서브나우티카2",
+    "Subnautica 2",
+    "서브노티카2",
+    "Subnautica2"
+  ],
+  "slug": "subnautica-2",
+  "scope": "broad",
+  "allowed_tiers": [
+    "tier-1",
+    "tier-2",
+    "tier-3",
+    "tier-4"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - Subnautica 2",
+      "url": "https://store.steampowered.com/search/?term=Subnautica%202",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - Subnautica 2",
+      "url": "https://www.google.com/search?q=Subnautica%202+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - Subnautica 2",
+      "url": "https://www.google.com/search?q=Subnautica%202+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - Subnautica 2",
+      "url": "https://www.google.com/search?q=Subnautica%202+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - Subnautica 2",
+      "url": "https://www.mobygames.com/search/?q=Subnautica%202",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S6",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - Subnautica 2",
+      "url": "https://www.google.com/search?q=Subnautica%202+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S7",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - 서브나우티카2",
+      "url": "https://store.steampowered.com/search/?term=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S8",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - 서브나우티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S9",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - 서브나우티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S10",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - 서브나우티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S11",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - 서브나우티카2",
+      "url": "https://www.mobygames.com/search/?q=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S12",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - 서브나우티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%82%98%EC%9A%B0%ED%8B%B0%EC%B9%B42+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S13",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - 서브노티카2",
+      "url": "https://store.steampowered.com/search/?term=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S14",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - 서브노티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S15",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - 서브노티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S16",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - 서브노티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S17",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - 서브노티카2",
+      "url": "https://www.mobygames.com/search/?q=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S18",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - 서브노티카2",
+      "url": "https://www.google.com/search?q=%EC%84%9C%EB%B8%8C%EB%85%B8%ED%8B%B0%EC%B9%B42+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S19",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - Subnautica2",
+      "url": "https://store.steampowered.com/search/?term=Subnautica2",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S20",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - Subnautica2",
+      "url": "https://www.google.com/search?q=Subnautica2+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S21",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - Subnautica2",
+      "url": "https://www.google.com/search?q=Subnautica2+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S22",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - Subnautica2",
+      "url": "https://www.google.com/search?q=Subnautica2+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S23",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - Subnautica2",
+      "url": "https://www.mobygames.com/search/?q=Subnautica2",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S24",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - Subnautica2",
+      "url": "https://www.google.com/search?q=Subnautica2+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S25",
+      "claims": [
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13"
+      ],
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store - Subnautica 2",
+      "url": "https://store.steampowered.com/app/1962700/",
+      "status": "fetched",
+      "steam_appid": 1962700,
+      "matched_query": "Subnautica 2"
+    },
+    {
+      "id": "S26",
+      "claims": [
+        "C14",
+        "C15",
+        "C16"
+      ],
+      "tier": "tier-3",
+      "kind": "reference",
+      "title": "Wikipedia - Subnautica 2",
+      "url": "https://en.wikipedia.org/wiki/Subnautica_2",
+      "status": "fetched",
+      "matched_query": "Subnautica 2"
+    },
+    {
+      "id": "R1",
+      "claims": [
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "tier": "tier-4",
+      "kind": "user-review",
+      "title": "Steam Reviews - Subnautica 2",
+      "url": "https://store.steampowered.com/app/1962700/#app_reviews_hash",
+      "status": "fetched",
+      "steam_appid": 1962700,
+      "review_summary": {
+        "total_reviews": 69993,
+        "total_positive": 65290,
+        "total_negative": 4703,
+        "review_score_desc": "Very Positive"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "source_id": "resolver",
+      "field": "alias",
+      "text": "서브나우티카2",
+      "confidence": "medium",
+      "claim_type": "resolver"
+    },
+    {
+      "id": "C2",
+      "source_id": "resolver",
+      "field": "alias",
+      "text": "Subnautica 2",
+      "confidence": "medium",
+      "claim_type": "resolver"
+    },
+    {
+      "id": "C3",
+      "source_id": "resolver",
+      "field": "alias",
+      "text": "서브노티카2",
+      "confidence": "medium",
+      "claim_type": "resolver"
+    },
+    {
+      "id": "C4",
+      "source_id": "resolver",
+      "field": "alias",
+      "text": "Subnautica2",
+      "confidence": "medium",
+      "claim_type": "resolver"
+    },
+    {
+      "id": "C5",
+      "source_id": "S25",
+      "field": "title",
+      "text": "Subnautica 2",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C6",
+      "source_id": "S25",
+      "field": "short_description",
+      "text": "Subnautica 2 is an underwater survival adventure set on an all-new alien world, developed by Unknown Worlds. Play alone or with friends in 4-player co-op. Adapt to survive by building custom bases and crafting tools. Explore the unknown to uncover the mysteries hidden within the depths.",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C7",
+      "source_id": "S25",
+      "field": "genre",
+      "text": "Action",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C8",
+      "source_id": "S25",
+      "field": "genre",
+      "text": "Adventure",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C9",
+      "source_id": "S25",
+      "field": "genre",
+      "text": "Early Access",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C10",
+      "source_id": "S25",
+      "field": "platform",
+      "text": "windows",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C11",
+      "source_id": "S25",
+      "field": "developer",
+      "text": "Unknown Worlds Entertainment",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C12",
+      "source_id": "S25",
+      "field": "publisher",
+      "text": "Unknown Worlds Entertainment",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C13",
+      "source_id": "S25",
+      "field": "release_date",
+      "text": "May 14, 2026",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C14",
+      "source_id": "S26",
+      "field": "summary",
+      "text": "Subnautica 2 is an action-adventure survival game developed by Unknown Worlds Entertainment. It is a sequel to 2018's Subnautica and the third game in the series after 2021's Subnautica: Below Zero. The game was released in early access on May 14, 2026.",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C15",
+      "source_id": "S26",
+      "field": "tag",
+      "text": "action",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C16",
+      "source_id": "S26",
+      "field": "tag",
+      "text": "survival",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C17",
+      "source_id": "R1",
+      "field": "review_sentiment",
+      "text": "Very Positive",
+      "confidence": "medium",
+      "claim_type": "player-experience",
+      "sentiment": "mixed"
+    },
+    {
+      "id": "C18",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "+Cool map for now +Loads to do +Like the mechanics +Super interesting story But too dark sometimes but overal a solid 8.8/10",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C19",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "SEEK FRESH WATER INTAKE",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C20",
+      "source_id": "R1",
+      "field": "player_praise",
+      "text": "i liked how u can play with friends",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "positive"
+    },
+    {
+      "id": "C21",
+      "source_id": "R1",
+      "field": "player_complaint",
+      "text": "i did not like this game it is cleary still in development and unfinished. there is also theese parts of the map they wont let me go in, Do not buy this game 0/10",
+      "confidence": "low",
+      "claim_type": "player-experience",
+      "sentiment": "negative"
+    },
+    {
+      "id": "C22",
+      "source_id": "R1",
+      "field": "experience_signal",
+      "text": "Steam reviews fetched: 20 samples, summary=Very Positive",
+      "confidence": "medium",
+      "claim_type": "player-experience",
+      "sentiment": "mixed"
+    }
+  ],
+  "unresolved_questions": [
+    "핵심 재미와 차별점은 플레이 관찰 또는 공식 설명으로 보강해야 한다."
+  ]
+}

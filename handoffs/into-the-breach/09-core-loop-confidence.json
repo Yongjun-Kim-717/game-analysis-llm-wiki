@@ -1,0 +1,29 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "런 시작",
+      "confidence": "medium",
+      "source_ids": [
+        "U1"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "위험과 보상 선택",
+      "confidence": "medium",
+      "source_ids": [
+        "U1"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "실패 또는 클리어 후 재시도",
+      "confidence": "medium",
+      "source_ids": [
+        "U1"
+      ],
+      "rationale": "source-backed inference"
+    }
+  ]
+}

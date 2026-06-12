@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Game Analysis LLM Wiki</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>Game Analysis Wiki</strong>
+        <span id="page-count">loading</span>
+      </div>
+
+      <div class="group-tabs" id="group-tabs"></div>
+      <input id="search" placeholder="게임명, 별칭, 태그, 메커니즘 검색" />
+      <div class="tag-panel" id="tag-panel"></div>
+      <nav id="results"></nav>
+    </aside>
+
+    <main class="content">
+      <article id="page"></article>
+    </main>
+
+    <aside class="assistant">
+      <h2>Skill Runner</h2>
+      <button id="screenshot-mode" class="secondary-action" type="button">Screenshot Mode</button>
+      <p class="assistant-note">API Key 없이 로컬 Skill, Subagent 단계, MCP Tool을 실행합니다.</p>
+      <label class="field-label" for="skill-select">Skill</label>
+      <select id="skill-select">
+        <option value="analyze-new-game">Analyze New Game</option>
+        <option value="compare-existing-games">Compare Existing Games</option>
+        <option value="update-existing-page">Update Existing Page</option>
+        <option value="edit-wiki-section">Edit Wiki Section</option>
+        <option value="archive-wiki-page">Archive Wiki Page</option>
+        <option value="merge-duplicate-pages">Merge Duplicate Pages</option>
+        <option value="create-design-note">Create Design Note</option>
+        <option value="validate-wiki-page">Validate Wiki Page</option>
+        <option value="tag-classify-page">Tag & Classify Page</option>
+        <option value="refresh-evidence">Refresh Evidence</option>
+        <option value="quality-backfill">Quality Backfill</option>
+        <option value="maintenance-sweep">Maintenance Sweep</option>
+      </select>
+      <form id="skill-form"></form>
+      <button id="skill-run">Run Skill</button>
+      <section class="assistant-output document-status">
+        <strong>Selected Page Status</strong>
+        <div id="page-status" class="skill-output">문서를 선택하면 schema, evidence, quality 상태가 표시됩니다.</div>
+      </section>
+      <section class="assistant-output">
+        <strong>Execution Result</strong>
+        <div id="skill-output" class="skill-output">Skill을 선택하고 실행하면 결과가 여기에 표시됩니다.</div>
+      </section>
+    </aside>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

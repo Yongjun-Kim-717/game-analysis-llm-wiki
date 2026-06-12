@@ -1,0 +1,10 @@
+{
+  "agent": "Final Review Agent",
+  "validation": {
+    "ok": true,
+    "path": "wiki/games/maplestory.md",
+    "page_type": "game-analysis",
+    "missing_metadata": [],
+    "missing_sections": []
+  }
+}

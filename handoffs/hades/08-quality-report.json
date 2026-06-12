@@ -1,0 +1,25 @@
+{
+  "agent": "Quality Reviewer Agent",
+  "game": "Hades",
+  "quality_score": 91,
+  "quality_level": "strong",
+  "evidence_level": "high",
+  "experience_evidence_level": "medium",
+  "metrics": {
+    "fetched_sources": 3,
+    "tier_one_sources": 1,
+    "reference_sources": 1,
+    "player_experience_claims": 1,
+    "core_loop_steps": 6,
+    "mechanics": 2,
+    "unresolved_questions": 0,
+    "schema_valid": true
+  },
+  "strengths": [
+    "공식/스토어 계열 출처가 있다.",
+    "공개 참고 출처가 있다.",
+    "유저 반응/플레이 경험 신호가 있다.",
+    "게임 페이지 스키마 검증을 통과했다."
+  ],
+  "gaps": []
+}

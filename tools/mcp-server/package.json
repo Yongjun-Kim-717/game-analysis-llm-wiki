@@ -1,0 +1,18 @@
+{
+  "name": "game-analysis-wiki-mcp-server",
+  "version": "0.2.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "tools:list": "node src/index.js tools/list",
+    "tool": "node src/index.js tools/call",
+    "search": "node src/index.js tools/call wiki.search",
+    "get": "node src/index.js tools/call wiki.get_page",
+    "compare": "node src/index.js tools/call game.compare",
+    "validate": "node src/index.js tools/call schema.validate",
+    "graph": "node src/index.js tools/call graph.get"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

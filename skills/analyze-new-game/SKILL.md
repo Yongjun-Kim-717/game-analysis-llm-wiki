@@ -1,0 +1,64 @@
+# Analyze New Game Skill
+
+Use this skill when the user wants to add a new game analysis page from a game name, alias, source URL, or raw note.
+
+## Inputs
+
+- game name
+- aliases
+- search scope: conservative / standard / broad
+- optional genre or tag hints
+- optional platform hints
+- source URLs
+- raw note
+- include player reviews
+
+## Pipeline
+
+1. Title Resolver normalizes the user query into a canonical title and aliases.
+2. Research Agent builds scoped source targets, records user-provided sources and notes, and fetches public no-key sources when possible.
+3. Source Organizer Agent separates official/store sources, reference sources, player-experience sources, and user notes.
+4. Evidence Reviewer Agent assigns fact and player-experience evidence levels.
+5. Game Analyst Agent infers core loop, mechanics, tags, and fun factor hypothesis.
+6. Quality Reviewer Agent calculates `quality_score`, `quality_level`, and Core Loop confidence.
+7. Wiki Builder Agent writes evidence and game pages through MCP `wiki.write_page`.
+8. Final Review Agent calls MCP `schema.validate`.
+9. Revision Agent writes `07-revision-plan.json` when the page needs more evidence or schema repair.
+10. Maintenance Agent appends `journal.md`.
+
+## Player Review Handling
+
+When `includeReviews` is enabled or search scope is `broad`, the Research Agent may collect Tier 4 player-experience claims.
+
+Tier 4 claims are used only for:
+
+- user reaction summary
+- player experience observation
+- fun factor confidence
+- friction point notes
+
+They must not be used to assert basic facts such as release date, platform, developer, or official genre.
+
+## Source Traceability
+
+Every source or note receives an id:
+
+- `S1`, `S2`: source records
+- `R1`: review/player-experience source
+- `U1`: user raw note
+- `[inference]`: analysis inferred from available claims
+
+The generated wiki page must cite these ids near relevant information.
+
+## Quality Output
+
+The skill writes:
+
+- `08-quality-report.json`
+- `09-core-loop-confidence.json`
+
+The game page frontmatter includes `quality_score` and `quality_level`. Core Loop items include confidence markers such as `[confidence: high]`.
+
+## Failure Handling
+
+If no source can be fetched, the page is marked `status: needs-research` and `evidence_level: seed`. The generated page is a skeleton, not a completed analysis.

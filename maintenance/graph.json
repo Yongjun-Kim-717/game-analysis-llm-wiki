@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {"id": "slay-the-spire", "type": "game", "label": "Slay the Spire"},
+    {"id": "roguelike-deckbuilder", "type": "genre", "label": "Roguelike Deckbuilder"},
+    {"id": "deckbuilding-roguelike", "type": "mechanic", "label": "Deckbuilding Roguelike"},
+    {"id": "route-risk-reward", "type": "mechanic", "label": "Route Risk/Reward"},
+    {"id": "hades", "type": "game", "label": "Hades"}
+  ],
+  "edges": [
+    {"source": "slay-the-spire", "target": "roguelike-deckbuilder", "type": "belongs_to"},
+    {"source": "slay-the-spire", "target": "deckbuilding-roguelike", "type": "uses"},
+    {"source": "slay-the-spire", "target": "route-risk-reward", "type": "uses"},
+    {"source": "slay-the-spire", "target": "hades", "type": "compared_with"}
+  ]
+}
+

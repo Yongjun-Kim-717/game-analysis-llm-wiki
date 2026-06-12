@@ -1,0 +1,37 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "map-route-choice",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "turn-based-card-combat",
+      "confidence": "high",
+      "source_ids": [
+        "page"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "card-reward-selection",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "deck-refinement",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "relic-synergy",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    }
+  ]
+}

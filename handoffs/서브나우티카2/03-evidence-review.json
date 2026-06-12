@@ -1,0 +1,9 @@
+{
+  "agent": "Evidence Reviewer Agent",
+  "evidence_level": "seed",
+  "fact_evidence_level": "seed",
+  "experience_evidence_level": "missing",
+  "confidence_notes": [
+    "입력 자료가 제한적이므로 draft 상태로 유지한다."
+  ]
+}

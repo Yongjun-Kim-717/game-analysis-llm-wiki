@@ -1,0 +1,209 @@
+{
+  "agent": "Research Agent",
+  "game": "MapleStory",
+  "slug": "maplestory",
+  "scope": "standard",
+  "allowed_tiers": [
+    "tier-1",
+    "tier-2",
+    "tier-3"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search",
+      "url": "https://store.steampowered.com/search/?term=MapleStory",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search",
+      "url": "https://www.google.com/search?q=MapleStory+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search",
+      "url": "https://www.google.com/search?q=MapleStory+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search",
+      "url": "https://www.google.com/search?q=MapleStory+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search",
+      "url": "https://www.mobygames.com/search/?q=MapleStory",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S6",
+      "claims": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13"
+      ],
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store - MapleStory",
+      "url": "https://store.steampowered.com/app/216150/",
+      "status": "fetched"
+    },
+    {
+      "id": "S7",
+      "claims": [
+        "C14"
+      ],
+      "tier": "tier-3",
+      "kind": "reference",
+      "title": "Wikipedia - MapleStory",
+      "url": "https://en.wikipedia.org/wiki/MapleStory",
+      "status": "fetched"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "source_id": "S6",
+      "field": "title",
+      "text": "MapleStory",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C2",
+      "source_id": "S6",
+      "field": "short_description",
+      "text": "Join over 260 million players worldwide in MapleStory, the world’s biggest 2D MMORPG adventure! Play now for free.",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C3",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "Action",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C4",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "Adventure",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C5",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "Casual",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C6",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "Massively Multiplayer",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C7",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "RPG",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C8",
+      "source_id": "S6",
+      "field": "genre",
+      "text": "Free To Play",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C9",
+      "source_id": "S6",
+      "field": "platform",
+      "text": "windows",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C10",
+      "source_id": "S6",
+      "field": "platform",
+      "text": "mac",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C11",
+      "source_id": "S6",
+      "field": "developer",
+      "text": "NEXON Korea Corporation",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C12",
+      "source_id": "S6",
+      "field": "publisher",
+      "text": "Nexon America Inc.",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C13",
+      "source_id": "S6",
+      "field": "release_date",
+      "text": "Aug 9, 2012",
+      "confidence": "high",
+      "claim_type": "source-backed"
+    },
+    {
+      "id": "C14",
+      "source_id": "S7",
+      "field": "summary",
+      "text": "MapleStory is a free-to-play, 2D, side-scrolling massively multiplayer online role-playing game, developed by South Korean company Wizet and published by Nexon. Several versions of the game are available for specific countries or regions, published by various companies.",
+      "confidence": "medium",
+      "claim_type": "source-backed"
+    }
+  ],
+  "unresolved_questions": [
+    "핵심 재미와 차별점은 플레이 관찰 또는 공식 설명으로 보강해야 한다."
+  ]
+}

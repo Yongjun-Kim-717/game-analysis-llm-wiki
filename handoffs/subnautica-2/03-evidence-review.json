@@ -1,0 +1,9 @@
+{
+  "agent": "Evidence Reviewer Agent",
+  "evidence_level": "high",
+  "fact_evidence_level": "high",
+  "experience_evidence_level": "medium",
+  "confidence_notes": [
+    "수집된 출처를 기반으로 draft 분석을 생성했다."
+  ]
+}

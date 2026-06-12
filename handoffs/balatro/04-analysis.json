@@ -1,0 +1,25 @@
+{
+  "agent": "Game Analyst Agent",
+  "core_loop": [
+    "카드/선택지 획득",
+    "덱 또는 빌드 조정",
+    "전투/도전 해결",
+    "런 시작",
+    "위험과 보상 선택",
+    "실패 또는 클리어 후 재시도"
+  ],
+  "mechanics": [
+    "deckbuilding",
+    "run-based-progression"
+  ],
+  "tags": [
+    "poker",
+    "roguelike",
+    "deckbuilder",
+    "progression"
+  ],
+  "fun_factor_hypothesis": "입력 자료 기준으로 반복 선택, 보상, 시스템 조합에서 재미가 발생한다고 가정한다.",
+  "differentiation_notes": [
+    "추가 비교 분석 필요"
+  ]
+}

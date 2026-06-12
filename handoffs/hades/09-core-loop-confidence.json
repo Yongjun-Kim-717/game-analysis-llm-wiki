@@ -1,0 +1,51 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "런 시작",
+      "confidence": "high",
+      "source_ids": [
+        "S7"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "위험과 보상 선택",
+      "confidence": "high",
+      "source_ids": [
+        "S7"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "실패 또는 클리어 후 재시도",
+      "confidence": "high",
+      "source_ids": [
+        "S7"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "실시간 조작 전투",
+      "confidence": "high",
+      "source_ids": [
+        "S7"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "전투 보상 선택",
+      "confidence": "high",
+      "source_ids": [
+        "S7"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "숙련 기반 반복",
+      "confidence": "low",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    }
+  ]
+}

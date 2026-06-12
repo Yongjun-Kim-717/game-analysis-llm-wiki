@@ -1,0 +1,24 @@
+{
+  "name": "game-analysis-llm-wiki",
+  "version": "1.0.0",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "dev": "node tools/viewer-server.js",
+    "start": "node tools/viewer-server.js",
+    "mcp": "node tools/mcp-server/src/index.js",
+    "mcp:list": "node tools/mcp-server/src/index.js tools/list",
+    "mcp:search": "node tools/mcp-server/src/index.js tools/call wiki.search",
+    "mcp:get": "node tools/mcp-server/src/index.js tools/call wiki.get_page",
+    "mcp:compare": "node tools/mcp-server/src/index.js tools/call game.compare",
+    "mcp:validate": "node tools/mcp-server/src/index.js tools/call schema.validate",
+    "mcp:graph": "node tools/mcp-server/src/index.js tools/call graph.get",
+    "wiki:add": "node tools/wiki-add.js",
+    "skill": "node tools/skill-runner.js",
+    "analyze": "node tools/skill-runner.js analyze-new-game",
+    "validate": "node tools/mcp-server/src/index.js tools/call schema.validate \"{path:wiki/games/slay-the-spire.md}\"",
+    "demo": "node tools/mcp-server/src/index.js tools/call game.compare \"{gameA:slay-the-spire,gameB:hades}\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
