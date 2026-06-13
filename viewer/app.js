@@ -450,7 +450,12 @@ function coverageItems(metadata = {}) {
     ["storefront", "Storefront"],
     ["reference", "Reference"],
     ["community", "Community"],
-    ["critic", "Critic"]
+    ["critic", "Critic"],
+    ["ugc-platform", "UGC Platform"],
+    ["creator", "Creator"],
+    ["platform-community", "Platform Community"],
+    ["gameplay-observation", "Play Observation"],
+    ["template-comparison", "Template Compare"]
   ].map(([id, label]) => ({ id, label, covered: covered.has(id) }));
 }
 
@@ -495,7 +500,7 @@ function renderPageStatus(page, validation = null) {
       ${statusPill("schema", schemaSummary, validationTone(validation))}
       ${statusPill("evidence", metadata.evidence_level || "n/a", evidenceTone(metadata.evidence_level))}
       ${statusPill("quality", quality, qualityTone(metadata))}
-      ${statusPill("coverage", `${listValue(metadata.source_coverage).length || 0}/5`, listValue(metadata.source_coverage).length >= 3 ? "ok" : "warn")}
+      ${statusPill("coverage", `${listValue(metadata.source_coverage).length || 0}/${coverageItems(metadata).length}`, listValue(metadata.source_coverage).length >= 3 ? "ok" : "warn")}
       ${statusPill("trust flags", `${listValue(metadata.trust_flags).length || 0}`, listValue(metadata.trust_flags).length ? "warn" : "ok")}
     </div>
     ${isGame ? renderCoverageBadges(metadata) : ""}

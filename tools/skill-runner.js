@@ -42,6 +42,10 @@ function compactKey(value) {
     .replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
+function isPlaceholderValue(value) {
+  return /^(조사 필요|needs-research|unknown|n\/a|none)$/i.test(String(value || "").trim());
+}
+
 const TITLE_RESOLVER = new Map([
   ["서브나우티카2", { title: "Subnautica 2", aliases: ["서브나우티카2", "서브노티카2", "Subnautica2", "Subnautica 2"] }],
   ["서브노티카2", { title: "Subnautica 2", aliases: ["서브나우티카2", "서브노티카2", "Subnautica2", "Subnautica 2"] }],
@@ -52,8 +56,8 @@ function resolveCanonicalTitle(inputTitle, explicitAliases = []) {
   const original = String(inputTitle || "").trim();
   const mapped = TITLE_RESOLVER.get(compactKey(original));
   const title = mapped?.title || original;
-  const aliases = [...new Set([original, title, ...(mapped?.aliases || []), ...explicitAliases].filter(Boolean))];
-  return { original, title, aliases, searchTerms: [...new Set([title, original, ...aliases].filter(Boolean))] };
+  const aliases = [...new Set([original, title, ...(mapped?.aliases || []), ...explicitAliases].filter((item) => item && !isPlaceholderValue(item)))];
+  return { original, title, aliases, searchTerms: [...new Set([title, original, ...aliases].filter((item) => item && !isPlaceholderValue(item)))] };
 }
 
 function ensureDir(filePath) {
@@ -379,6 +383,41 @@ const SOURCE_AGENT_POOL = [
     required: true
   },
   {
+    id: "ugc-platform-agent",
+    label: "UGC Platform Agent",
+    spec: "agents/source-pool/ugc-platform-agent.md",
+    sourceKinds: ["ugc-platform", "ugc-platform-search"],
+    required: false
+  },
+  {
+    id: "creator-profile-agent",
+    label: "Creator Profile Agent",
+    spec: "agents/source-pool/creator-profile-agent.md",
+    sourceKinds: ["creator-profile", "creator-search"],
+    required: false
+  },
+  {
+    id: "ugc-community-signal-agent",
+    label: "UGC Community Signal Agent",
+    spec: "agents/source-pool/ugc-community-signal-agent.md",
+    sourceKinds: ["platform-community", "korean-community", "ugc-community"],
+    required: false
+  },
+  {
+    id: "ugc-gameplay-observation-agent",
+    label: "UGC Gameplay Observation Agent",
+    spec: "agents/source-pool/ugc-gameplay-observation-agent.md",
+    sourceKinds: ["gameplay-video", "play-observation"],
+    required: false
+  },
+  {
+    id: "ugc-genre-template-agent",
+    label: "UGC Genre Template Agent",
+    spec: "agents/source-pool/ugc-genre-template-agent.md",
+    sourceKinds: ["template-comparison", "ugc-template-search"],
+    required: false
+  },
+  {
     id: "cross-check-agent",
     label: "Cross-Check Agent",
     spec: "agents/source-pool/cross-check-agent.md",
@@ -404,11 +443,20 @@ function tierForUrl(url) {
 
 function kindForUrl(url) {
   const lower = String(url).toLowerCase();
+  if (/maplestoryworlds|maplestoryworld|worlds\.nexon|nexon.*worlds|roblox|fortnite|uefn|minecraft|steamcommunity\.com\/workshop|itch\.io/.test(lower)) return "ugc-platform";
+  if (/creator|profile|user\/|users\/|@/.test(lower) && /roblox|maplestory|nexon|itch|youtube/.test(lower)) return "creator-profile";
+  if (/youtube|youtu\.be|twitch/.test(lower)) return "gameplay-video";
+  if (/naver|inven|dcinside|ruliweb|arca\.live|fmkorea/.test(lower)) return "korean-community";
   if (/steam|playstation|xbox|nintendo|epicgames|gog/.test(lower)) return "store";
   if (/official|developer|publisher|press/.test(lower)) return "official";
   if (/wiki|igdb|mobygames|giantbomb|fandom/.test(lower)) return "reference";
   if (/youtube|review|reddit|community|blog/.test(lower)) return "reaction";
   return "source";
+}
+
+function isUgcContext({ title = "", aliases = [], platform = [], note = "", tags = [] } = {}) {
+  const text = [title, ...aliases, ...platform, note, ...tags].join(" ").toLowerCase();
+  return /maplestory worlds|maplestory world|메이플스토리 월드|메이플 월드|roblox|fortnite creative|uefn|minecraft|steam workshop|workshop|ugc|user-created|user generated|유저 제작|사용자 제작|월드|커스텀|모드/.test(text);
 }
 
 function sourceAgentForSource(source) {
@@ -438,14 +486,30 @@ function sourceCoverageFor(research) {
     storefront: byAgent["storefront-agent"].confirmed_sources > 0,
     reference: byAgent["gameplay-evidence-agent"].confirmed_sources > 0,
     community: byAgent["community-agent"].claims > 0 || byAgent["community-agent"].confirmed_sources > 0,
-    critic: byAgent["critic-review-agent"].confirmed_sources > 0
+    critic: byAgent["critic-review-agent"].confirmed_sources > 0,
+    "ugc-platform": byAgent["ugc-platform-agent"].confirmed_sources > 0,
+    creator: byAgent["creator-profile-agent"].confirmed_sources > 0,
+    "platform-community": byAgent["ugc-community-signal-agent"].confirmed_sources > 0 || byAgent["ugc-community-signal-agent"].claims > 0,
+    "gameplay-observation": byAgent["ugc-gameplay-observation-agent"].confirmed_sources > 0 || byAgent["ugc-gameplay-observation-agent"].claims > 0,
+    "template-comparison": byAgent["ugc-genre-template-agent"].confirmed_sources > 0
   };
+  const isUgc = research.ugc_mode === true || research.sources.some((source) =>
+    ["ugc-platform", "ugc-platform-search", "creator-profile", "creator-search", "platform-community", "korean-community", "ugc-community", "gameplay-video", "play-observation", "template-comparison", "ugc-template-search"].includes(source.kind)
+  );
   const flags = [];
-  if (!coverage.official && !coverage.storefront) flags.push("needs-official-or-store-source");
-  if (!coverage.community) flags.push("needs-player-experience-signal");
-  if (!coverage.reference) flags.push("needs-reference-or-gameplay-evidence");
+  if (isUgc) {
+    if (!coverage["ugc-platform"]) flags.push("needs-ugc-platform-page");
+    if (!coverage.creator) flags.push("needs-creator-profile");
+    if (!coverage["gameplay-observation"]) flags.push("needs-direct-play-observation");
+    if (!coverage["platform-community"]) flags.push("needs-platform-community-signal");
+    if (!coverage["template-comparison"]) flags.push("needs-template-comparison");
+  } else {
+    if (!coverage.official && !coverage.storefront) flags.push("needs-official-or-store-source");
+    if (!coverage.community) flags.push("needs-player-experience-signal");
+    if (!coverage.reference) flags.push("needs-reference-or-gameplay-evidence");
+  }
   if (research.sources.some((source) => source.status === "candidate")) flags.push("candidate-sources-present");
-  return { byAgent, coverage, flags };
+  return { byAgent, coverage, flags, isUgc };
 }
 
 function buildAgentPoolTrace({ research, scope, includeReviews }) {
@@ -454,6 +518,7 @@ function buildAgentPoolTrace({ research, scope, includeReviews }) {
     if (agent.required) return true;
     if (agent.id === "community-agent") return includeReviews || scope === "broad" || coverage.byAgent[agent.id].sources > 0;
     if (agent.id === "critic-review-agent") return scope === "broad" || coverage.byAgent[agent.id].sources > 0;
+    if (agent.id.startsWith("ugc-") || agent.id === "creator-profile-agent") return coverage.isUgc || coverage.byAgent[agent.id].sources > 0;
     return coverage.byAgent[agent.id].sources > 0;
   });
   const steps = selectedAgents.map((agent) => {
@@ -483,6 +548,7 @@ function buildAgentPoolTrace({ research, scope, includeReviews }) {
       reason: "Not required for current scope or no matching source candidates."
     })),
     coverage: coverage.coverage,
+    ugc_mode: coverage.isUgc,
     trust_flags: coverage.flags,
     steps
   };
@@ -530,6 +596,7 @@ function buildResearchFromExistingEvidence({ page, gameMarkdown, evidenceMarkdow
     aliases,
     slug,
     scope: "backfill-existing-evidence",
+    ugc_mode: isUgcContext({ title, aliases, platform, note: `${gameMarkdown}\n${evidenceMarkdown}`, tags }),
     allowed_tiers: ["tier-1", "tier-2", "tier-3", "tier-4"],
     sources: [],
     claims: [],
@@ -570,7 +637,29 @@ function buildResearchFromExistingEvidence({ page, gameMarkdown, evidenceMarkdow
   return research;
 }
 
-function buildSearchTargets(searchTerms, scope) {
+function buildUgcSearchTargets(searchTerms, context = {}) {
+  const targets = [];
+  const platformText = (context.platform || []).join(" ").toLowerCase();
+  for (const term of searchTerms) {
+    const encoded = encodeURIComponent(term);
+    const encodedWorlds = encodeURIComponent(`${term} 메이플스토리 월드`);
+    const encodedWorldsEn = encodeURIComponent(`${term} MapleStory Worlds`);
+    targets.push(
+      { tier: "tier-1", kind: "ugc-platform-search", title: `MapleStory Worlds Search - ${term}`, url: `https://www.google.com/search?q=${encodedWorlds}` },
+      { tier: "tier-1", kind: "ugc-platform-search", title: `MapleStory Worlds English Search - ${term}`, url: `https://www.google.com/search?q=${encodedWorldsEn}` },
+      { tier: "tier-2", kind: "creator-search", title: `Creator/Profile Search - ${term}`, url: `https://www.google.com/search?q=${encoded}+creator+profile+MapleStory+Worlds` },
+      { tier: "tier-3", kind: "gameplay-video", title: `YouTube Gameplay Search - ${term}`, url: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${term} 플레이 메이플스토리 월드`)}` },
+      { tier: "tier-3", kind: "korean-community", title: `Naver Community Search - ${term}`, url: `https://search.naver.com/search.naver?query=${encodedWorlds}` },
+      { tier: "tier-3", kind: "ugc-template-search", title: `UGC Template Comparison Search - ${term}`, url: `https://www.google.com/search?q=${encodeURIComponent(`${term} 듀얼 PVP 미니게임 메이플스토리 월드`)}` }
+    );
+    if (/roblox/.test(platformText)) {
+      targets.push({ tier: "tier-1", kind: "ugc-platform-search", title: `Roblox Search - ${term}`, url: `https://www.roblox.com/search/experiences?keyword=${encoded}` });
+    }
+  }
+  return targets;
+}
+
+function buildSearchTargets(searchTerms, scope, context = {}) {
   const base = [];
   for (const term of searchTerms) {
     const encoded = encodeURIComponent(term);
@@ -583,6 +672,7 @@ function buildSearchTargets(searchTerms, scope) {
       { tier: "tier-4", kind: "review-search", title: `Review Search - ${term}`, url: `https://www.google.com/search?q=${encoded}+review+game` }
     );
   }
+  if (context.ugcMode) base.push(...buildUgcSearchTargets(searchTerms, context));
   const allowed = new Set(SCOPE_TIERS[scope] || SCOPE_TIERS.standard);
   return base.filter((item, index, arr) =>
     allowed.has(item.tier) && arr.findIndex((other) => other.url === item.url) === index
@@ -591,6 +681,7 @@ function buildSearchTargets(searchTerms, scope) {
 
 function buildResearchPackage({ title, originalTitle, aliases, slug, scope, sources, note, genre, platform, tags, searchTerms }) {
   const allowed = new Set(SCOPE_TIERS[scope] || SCOPE_TIERS.standard);
+  const ugcMode = isUgcContext({ title, aliases, platform, note, tags });
   const sourceRecords = [];
   let sourceIndex = 1;
   for (const source of sources) {
@@ -606,7 +697,7 @@ function buildResearchPackage({ title, originalTitle, aliases, slug, scope, sour
       claims: []
     });
   }
-  for (const target of buildSearchTargets(searchTerms, scope)) {
+  for (const target of buildSearchTargets(searchTerms, scope, { ugcMode, platform, note, tags })) {
     sourceRecords.push({ id: `S${sourceIndex++}`, ...target, status: "candidate", claims: [] });
   }
 
@@ -621,6 +712,7 @@ function buildResearchPackage({ title, originalTitle, aliases, slug, scope, sour
     aliases,
     slug,
     scope,
+    ugc_mode: ugcMode,
     allowed_tiers: [...allowed],
     sources: sourceRecords,
     claims: [],
@@ -909,6 +1001,14 @@ function addSourceAgentPoolSections(markdown, agentPoolTrace) {
   return `${next.trimEnd()}\n\n${section}`;
 }
 
+function addUgcSections(markdown, research, agentPoolTrace) {
+  if (!agentPoolTrace?.ugc_mode) return markdown;
+  if (markdown.includes("\n## UGC 플랫폼 정보\n")) return markdown;
+  const coverage = agentPoolTrace.coverage || {};
+  const section = `## UGC 플랫폼 정보\n\n| 항목 | 내용 |\n| --- | --- |\n| UGC mode | yes |\n| 플랫폼 페이지 | ${coverage["ugc-platform"] ? "확인됨" : "조사 필요"} |\n| 제작자 프로필 | ${coverage.creator ? "확인됨" : "조사 필요"} |\n| 플랫폼 커뮤니티 신호 | ${coverage["platform-community"] ? "확인됨" : "조사 필요"} |\n| 플레이 관찰 | ${coverage["gameplay-observation"] ? "확인됨" : "조사 필요"} |\n| 템플릿 비교 | ${coverage["template-comparison"] ? "확인됨" : "조사 필요"} |\n\n## 플랫폼 내 문법\n\n- 이 문서는 사용자 제작 게임으로 감지되었으므로, 일반 상용 게임 장르뿐 아니라 플랫폼 내부 템플릿과 유행 장르를 함께 확인해야 한다. [inference]\n- 듀얼/PVP/미니게임/파티형 구조 여부는 플랫폼 페이지, 플레이 영상, 직접 플레이 관찰로 확인해야 한다.\n\n## 첫 플레이 관찰\n\n- 직접 플레이 또는 플레이 영상 기반 관찰이 아직 없으면 core loop confidence를 낮게 유지한다.\n- 확인할 항목: 첫 30초 행동, 승패 조건, 보상 조건, 세션 길이, 조작 복잡도, 소셜 상호작용.\n\n## UGC 특화 리스크\n\n- 플랫폼 검색 노출 편향\n- 제작자 업데이트 중단 가능성\n- 댓글/좋아요 표본 수 부족\n- 친구/지인 기반 평가 편향\n- 원 IP 리소스 의존도\n\n`;
+  return `${markdown.trimEnd()}\n\n${section}`;
+}
+
 function evidenceLevelFor(research, note) {
   const confirmed = research.sources.filter((source) => source.status === "user-provided" || source.status === "fetched");
   const hasTierOne = confirmed.some((source) => source.tier === "tier-1");
@@ -1157,7 +1257,7 @@ export async function analyzeNewGame(input = {}) {
   const provisionalValidation = { ok: true, missing_metadata: [], missing_sections: [] };
   let qualityReport = buildQualityReport({ title, research, evidenceLevel, experienceEvidenceLevel, coreLoop, mechanics, validation: provisionalValidation });
   let gameMarkdown = addUserReactionSections(
-    addSourceAgentPoolSections(buildGameMarkdown({
+    addUgcSections(addSourceAgentPoolSections(buildGameMarkdown({
       title,
       originalTitle: resolved.original,
       aliases: resolved.aliases,
@@ -1172,7 +1272,7 @@ export async function analyzeNewGame(input = {}) {
       note: note || descriptionText || summaryText,
       research,
       qualityReport
-    }), agentPoolTrace),
+    }), agentPoolTrace), research, agentPoolTrace),
     research
   );
   const gamePath = path.join(ROOT, "wiki", "games", `${slug}.md`);
@@ -1187,7 +1287,7 @@ export async function analyzeNewGame(input = {}) {
   const validation = schemaValidate({ path: rel(gamePath) });
   qualityReport = buildQualityReport({ title, research, evidenceLevel, experienceEvidenceLevel, coreLoop, mechanics, validation });
   gameMarkdown = addUserReactionSections(
-    addSourceAgentPoolSections(buildGameMarkdown({
+    addUgcSections(addSourceAgentPoolSections(buildGameMarkdown({
       title,
       originalTitle: resolved.original,
       aliases: resolved.aliases,
@@ -1202,7 +1302,7 @@ export async function analyzeNewGame(input = {}) {
       note: note || descriptionText || summaryText,
       research,
       qualityReport
-    }), agentPoolTrace),
+    }), agentPoolTrace), research, agentPoolTrace),
     research
   );
   wikiWritePage({

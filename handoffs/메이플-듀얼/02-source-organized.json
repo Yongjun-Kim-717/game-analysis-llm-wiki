@@ -1,0 +1,319 @@
+{
+  "agent": "Source Organizer Agent",
+  "claims_by_field": {
+    "platform": [
+      {
+        "id": "C1",
+        "source_id": "U1",
+        "field": "platform",
+        "text": "MapleStory Worlds",
+        "confidence": "medium",
+        "claim_type": "user-note",
+        "source_agent": "gameplay-evidence-agent",
+        "source_type": "user-note",
+        "evidence_level": "user-note",
+        "verified_status": "provided"
+      }
+    ],
+    "raw_note": [
+      {
+        "id": "C2",
+        "source_id": "U1",
+        "field": "raw_note",
+        "text": "메이플스토리 월드 플랫폼의 유저 제작 게임. 플랫폼 내부 페이지, 제작자, 플레이 영상, 커뮤니티 반응 확인 필요.",
+        "confidence": "medium",
+        "claim_type": "user-note",
+        "source_agent": "gameplay-evidence-agent",
+        "source_type": "user-note",
+        "evidence_level": "user-note",
+        "verified_status": "provided"
+      }
+    ],
+    "alias": [
+      {
+        "id": "C3",
+        "source_id": "resolver",
+        "field": "alias",
+        "text": "메이플 듀얼",
+        "confidence": "medium",
+        "claim_type": "resolver",
+        "source_agent": "research-orchestrator",
+        "source_type": "resolver",
+        "evidence_level": "inference",
+        "verified_status": "untracked"
+      },
+      {
+        "id": "C4",
+        "source_id": "resolver",
+        "field": "alias",
+        "text": "조사 필요",
+        "confidence": "medium",
+        "claim_type": "resolver",
+        "source_agent": "research-orchestrator",
+        "source_type": "resolver",
+        "evidence_level": "inference",
+        "verified_status": "untracked"
+      }
+    ],
+    "summary": [
+      {
+        "id": "C5",
+        "source_id": "S25",
+        "field": "summary",
+        "text": "Uhm Hong-sik, known professionally as Yoo Ah-in (Korean: 유아인), is a South Korean actor, creative director, and gallerist. As an actor, he is known for his roles in Punch (2011), Secret Affair (2014), Veteran (2015), The Throne (2015), Six Flying Dragons (2015–2016), Burning (2018), #Alive (2020), Voice of Silence (2020), and Hellbound (2021). He is the recipient of various accolades, including two Blue Dragon Film Awards and two Baeksang Arts Awards. He ranked 2nd on the 2016 Forbes Korea Power Celebrity list.",
+        "confidence": "medium",
+        "claim_type": "source-backed",
+        "source_agent": "gameplay-evidence-agent",
+        "source_type": "reference",
+        "evidence_level": "tier-3",
+        "verified_status": "fetched"
+      }
+    ]
+  },
+  "official_or_store_sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - 메이플 듀얼",
+      "url": "https://store.steampowered.com/search/?term=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S7",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - 조사 필요",
+      "url": "https://store.steampowered.com/search/?term=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S8",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S9",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S13",
+      "tier": "tier-1",
+      "kind": "ugc-platform-search",
+      "title": "MapleStory Worlds Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S14",
+      "tier": "tier-1",
+      "kind": "ugc-platform-search",
+      "title": "MapleStory Worlds English Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC%20MapleStory%20Worlds",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S15",
+      "tier": "tier-2",
+      "kind": "creator-search",
+      "title": "Creator/Profile Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC+creator+profile+MapleStory+Worlds",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S19",
+      "tier": "tier-1",
+      "kind": "ugc-platform-search",
+      "title": "MapleStory Worlds Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S20",
+      "tier": "tier-1",
+      "kind": "ugc-platform-search",
+      "title": "MapleStory Worlds English Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94%20MapleStory%20Worlds",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S21",
+      "tier": "tier-2",
+      "kind": "creator-search",
+      "title": "Creator/Profile Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94+creator+profile+MapleStory+Worlds",
+      "status": "candidate",
+      "claims": []
+    }
+  ],
+  "community_or_reference_sources": [
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - 메이플 듀얼",
+      "url": "https://www.mobygames.com/search/?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S6",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S10",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S11",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - 조사 필요",
+      "url": "https://www.mobygames.com/search/?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S12",
+      "tier": "tier-4",
+      "kind": "review-search",
+      "title": "Review Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94+review+game",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S16",
+      "tier": "tier-3",
+      "kind": "gameplay-video",
+      "title": "YouTube Gameplay Search - 메이플 듀얼",
+      "url": "https://www.youtube.com/results?search_query=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC%20%ED%94%8C%EB%A0%88%EC%9D%B4%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S17",
+      "tier": "tier-3",
+      "kind": "korean-community",
+      "title": "Naver Community Search - 메이플 듀얼",
+      "url": "https://search.naver.com/search.naver?query=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S18",
+      "tier": "tier-3",
+      "kind": "ugc-template-search",
+      "title": "UGC Template Comparison Search - 메이플 듀얼",
+      "url": "https://www.google.com/search?q=%EB%A9%94%EC%9D%B4%ED%94%8C%20%EB%93%80%EC%96%BC%20%EB%93%80%EC%96%BC%20PVP%20%EB%AF%B8%EB%8B%88%EA%B2%8C%EC%9E%84%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S22",
+      "tier": "tier-3",
+      "kind": "gameplay-video",
+      "title": "YouTube Gameplay Search - 조사 필요",
+      "url": "https://www.youtube.com/results?search_query=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94%20%ED%94%8C%EB%A0%88%EC%9D%B4%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S23",
+      "tier": "tier-3",
+      "kind": "korean-community",
+      "title": "Naver Community Search - 조사 필요",
+      "url": "https://search.naver.com/search.naver?query=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S24",
+      "tier": "tier-3",
+      "kind": "ugc-template-search",
+      "title": "UGC Template Comparison Search - 조사 필요",
+      "url": "https://www.google.com/search?q=%EC%A1%B0%EC%82%AC%20%ED%95%84%EC%9A%94%20%EB%93%80%EC%96%BC%20PVP%20%EB%AF%B8%EB%8B%88%EA%B2%8C%EC%9E%84%20%EB%A9%94%EC%9D%B4%ED%94%8C%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EC%9B%94%EB%93%9C",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S25",
+      "claims": [
+        "C5"
+      ],
+      "tier": "tier-3",
+      "kind": "reference",
+      "title": "Wikipedia - Yoo Ah-in",
+      "url": "https://en.wikipedia.org/wiki/Yoo_Ah-in",
+      "status": "fetched",
+      "matched_query": "조사 필요"
+    }
+  ],
+  "user_notes": [
+    {
+      "id": "U1",
+      "tier": "user-note",
+      "kind": "user-note",
+      "title": "User Raw Note",
+      "url": "",
+      "status": "provided",
+      "claims": [
+        "C1",
+        "C2"
+      ]
+    }
+  ]
+}

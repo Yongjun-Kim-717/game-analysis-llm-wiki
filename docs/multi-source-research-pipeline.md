@@ -62,3 +62,17 @@ User Game Name
 - 고전 게임: Reference, Community, Gameplay 중심
 
 이렇게 하면 모든 요청에 모든 agent를 호출하지 않아도 되고, 비용을 검색 범위와 목적에 맞춰 통제할 수 있다.
+
+## UGC Extension
+
+사용자 제작 게임으로 감지되면 다음 agent spec을 추가로 활성화한다.
+
+- `UGC Platform Agent`
+- `Creator Profile Agent`
+- `UGC Community Signal Agent`
+- `UGC Gameplay Observation Agent`
+- `UGC Genre Template Agent`
+
+감지 조건은 platform, note, title, alias, tag에 `MapleStory Worlds`, `메이플스토리 월드`, `Roblox`, `Fortnite Creative`, `UGC`, `유저 제작`, `월드`, `모드`, `커스텀` 등이 포함되는 경우다.
+
+MVP는 플랫폼 페이지 자동 크롤링을 보장하지 않고, 우선 정확한 candidate source와 trust flag를 남긴다. 직접 플레이 관찰이나 플랫폼 URL을 사용자가 추가하면 coverage가 올라간다.

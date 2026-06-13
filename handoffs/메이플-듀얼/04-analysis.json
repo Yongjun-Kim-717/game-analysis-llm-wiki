@@ -1,0 +1,45 @@
+{
+  "agent": "Game Analyst Agent",
+  "core_loop": [
+    "상황 판단",
+    "핵심 행동 수행",
+    "보상 획득",
+    "다음 선택으로 반복"
+  ],
+  "core_loop_confidence": [
+    {
+      "step": "상황 판단",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "핵심 행동 수행",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "보상 획득",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "다음 선택으로 반복",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    }
+  ],
+  "mechanics": [
+    "core-system-analysis-needed"
+  ],
+  "tags": [],
+  "fun_factor_hypothesis": "입력 자료 기준으로 반복 선택, 보상, 시스템 조합에서 재미가 발생한다고 가정한다.",
+  "differentiation_notes": [
+    "추가 비교 분석 필요"
+  ]
+}

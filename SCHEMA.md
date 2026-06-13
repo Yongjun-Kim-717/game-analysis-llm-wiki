@@ -106,6 +106,11 @@ Core Loop 항목은 다음 형식으로 작성한다.
 - `reference`
 - `community`
 - `critic`
+- `ugc-platform`
+- `creator`
+- `platform-community`
+- `gameplay-observation`
+- `template-comparison`
 
 `trust_flags`는 Cross-Check Agent가 남긴 보완 필요 항목이다.
 
@@ -113,6 +118,11 @@ Core Loop 항목은 다음 형식으로 작성한다.
 - `needs-player-experience-signal`
 - `needs-reference-or-gameplay-evidence`
 - `candidate-sources-present`
+- `needs-ugc-platform-page`
+- `needs-creator-profile`
+- `needs-direct-play-observation`
+- `needs-platform-community-signal`
+- `needs-template-comparison`
 
 Evidence claim의 확장 JSON Schema는 `schemas/evidence.schema.json`에 있다.
 

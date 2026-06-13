@@ -110,11 +110,14 @@ The MVP does not spawn parallel LLM workers or require an API key. `tools/skill-
 The design is documented in:
 
 - `docs/research-source-policy.md`
+- `docs/ugc-game-research-policy.md`
 - `docs/multi-source-research-pipeline.md`
 - `agents/source-pool/`
 - `schemas/evidence.schema.json`
 
 Each analysis run writes `handoffs/{game_slug}/02-source-agent-pool.json`, and generated game pages expose `source_agents`, `source_coverage`, and `trust_flags` in frontmatter. The viewer renders these as Evidence Coverage and Trust Flag cards so the user can see whether official/store/community/reference evidence is present.
+
+For user-created games such as MapleStory Worlds, Roblox, Fortnite Creative, or other UGC platform games, enter the platform hint in `Optional Platform` or `Optional Raw Note`. The runner then activates UGC-specific source agents and creates candidates for platform pages, creator profiles, platform community signals, gameplay observation, and template comparison.
 
 New game pages also include an analysis quality section. The Quality Reviewer Agent writes:
 

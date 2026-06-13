@@ -143,3 +143,31 @@
 - 2026-06-13: [Source Coverage Backfill] Source Coverage Backfill executed: 7 game pages updated
 
 - 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 evidence page written through MCP write tool
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 game page written through MCP write tool
+
+- 2026-06-13: [Quality Reviewer Agent] 메이플 듀얼 game page rewritten with analysis quality report
+
+- 2026-06-13: [Analyze New Game] 메이플 듀얼 분석 파이프라인 실행: wiki/games/메이플-듀얼.md 생성
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 evidence page written through MCP write tool
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 game page written through MCP write tool
+
+- 2026-06-13: [Quality Reviewer Agent] 메이플 듀얼 game page rewritten with analysis quality report
+
+- 2026-06-13: [Analyze New Game] 메이플 듀얼 분석 파이프라인 실행: wiki/games/메이플-듀얼.md 생성
+
+- 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 evidence page written through MCP write tool
+
+- 2026-06-13: [Wiki Builder Agent] 메이플 듀얼 game page written through MCP write tool
+
+- 2026-06-13: [Quality Reviewer Agent] 메이플 듀얼 game page rewritten with analysis quality report
+
+- 2026-06-13: [Analyze New Game] 메이플 듀얼 분석 파이프라인 실행: wiki/games/메이플-듀얼.md 생성
+
+- 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json

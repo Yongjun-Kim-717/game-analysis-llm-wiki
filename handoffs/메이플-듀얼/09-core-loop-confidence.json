@@ -1,0 +1,31 @@
+{
+  "agent": "Game Analyst Agent",
+  "items": [
+    {
+      "step": "상황 판단",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "핵심 행동 수행",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    },
+    {
+      "step": "보상 획득",
+      "confidence": "high",
+      "source_ids": [
+        "S25"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "다음 선택으로 반복",
+      "confidence": "medium",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    }
+  ]
+}

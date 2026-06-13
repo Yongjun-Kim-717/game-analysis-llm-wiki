@@ -24,6 +24,11 @@ If no target page is given, the skill updates all active `game-analysis` pages.
    - reference
    - community
    - critic
+   - ugc-platform
+   - creator
+   - platform-community
+   - gameplay-observation
+   - template-comparison
 5. Build a Spec-Based Agent Pool trace.
 6. Add or update frontmatter:
    - `source_agents`

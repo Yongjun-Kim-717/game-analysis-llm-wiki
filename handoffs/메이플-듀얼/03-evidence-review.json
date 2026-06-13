@@ -1,0 +1,9 @@
+{
+  "agent": "Evidence Reviewer Agent",
+  "evidence_level": "medium",
+  "fact_evidence_level": "medium",
+  "experience_evidence_level": "missing",
+  "confidence_notes": [
+    "수집된 출처를 기반으로 draft 분석을 생성했다."
+  ]
+}

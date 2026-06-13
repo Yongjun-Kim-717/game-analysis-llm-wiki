@@ -1,0 +1,11 @@
+{
+  "agent": "Revision Agent",
+  "game": "메이플 듀얼",
+  "status": "needs-revision",
+  "actions": [
+    {
+      "reason": "no player-experience signal",
+      "action": "run Broad scope with reviews enabled or add curated review/community source URLs"
+    }
+  ]
+}

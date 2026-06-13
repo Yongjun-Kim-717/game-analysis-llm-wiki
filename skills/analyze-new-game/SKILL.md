@@ -44,6 +44,24 @@ The generated game page frontmatter includes:
 
 This makes the pipeline upgradeable to real worker agents later without changing the wiki schema.
 
+## UGC Game Handling
+
+When the request appears to describe a user-created game, the runner activates UGC-specific source agents:
+
+- UGC Platform Agent
+- Creator Profile Agent
+- UGC Community Signal Agent
+- UGC Gameplay Observation Agent
+- UGC Genre Template Agent
+
+Useful user inputs:
+
+- `platform`: MapleStory Worlds, Roblox, Fortnite Creative, UGC, etc.
+- `note`: user-created game, platform page hint, creator name, gameplay observation
+- `sources`: platform game page, creator profile, gameplay video, community URL
+
+If these sources are missing, the page should remain `seed` or `needs-research` rather than inventing analysis.
+
 ## Player Review Handling
 
 When `includeReviews` is enabled or search scope is `broad`, the Research Agent may collect Tier 4 player-experience claims.
