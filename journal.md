@@ -89,3 +89,5 @@
 - 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
 
 - 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
+
+- 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
