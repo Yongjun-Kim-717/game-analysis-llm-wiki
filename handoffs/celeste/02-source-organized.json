@@ -1,0 +1,303 @@
+{
+  "agent": "Source Organizer Agent",
+  "claims_by_field": {
+    "raw_note": [
+      {
+        "id": "C1",
+        "source_id": "U1",
+        "field": "raw_note",
+        "text": "Local verification run for spec-based source agent pool.",
+        "confidence": "medium",
+        "claim_type": "user-note",
+        "source_agent": "gameplay-evidence-agent",
+        "source_type": "user-note",
+        "evidence_level": "user-note",
+        "verified_status": "provided"
+      }
+    ],
+    "alias": [
+      {
+        "id": "C2",
+        "source_id": "resolver",
+        "field": "alias",
+        "text": "Celeste",
+        "confidence": "medium",
+        "claim_type": "resolver",
+        "source_agent": "research-orchestrator",
+        "source_type": "resolver",
+        "evidence_level": "inference",
+        "verified_status": "untracked"
+      }
+    ],
+    "title": [
+      {
+        "id": "C3",
+        "source_id": "S6",
+        "field": "title",
+        "text": "Celeste",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "short_description": [
+      {
+        "id": "C4",
+        "source_id": "S6",
+        "field": "short_description",
+        "text": "Help Madeline survive her inner demons on her journey to the top of Celeste Mountain, in this super-tight platformer from the creators of TowerFall. Brave hundreds of hand-crafted challenges, uncover devious secrets, and piece together the mystery of the mountain.",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "genre": [
+      {
+        "id": "C5",
+        "source_id": "S6",
+        "field": "genre",
+        "text": "Action",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      },
+      {
+        "id": "C6",
+        "source_id": "S6",
+        "field": "genre",
+        "text": "Adventure",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      },
+      {
+        "id": "C7",
+        "source_id": "S6",
+        "field": "genre",
+        "text": "Indie",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "platform": [
+      {
+        "id": "C8",
+        "source_id": "S6",
+        "field": "platform",
+        "text": "windows",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      },
+      {
+        "id": "C9",
+        "source_id": "S6",
+        "field": "platform",
+        "text": "mac",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      },
+      {
+        "id": "C10",
+        "source_id": "S6",
+        "field": "platform",
+        "text": "linux",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "developer": [
+      {
+        "id": "C11",
+        "source_id": "S6",
+        "field": "developer",
+        "text": "Maddy Makes Games Inc.",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      },
+      {
+        "id": "C12",
+        "source_id": "S6",
+        "field": "developer",
+        "text": "Extremely OK Games, Ltd.",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "publisher": [
+      {
+        "id": "C13",
+        "source_id": "S6",
+        "field": "publisher",
+        "text": "Maddy Makes Games Inc.",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "release_date": [
+      {
+        "id": "C14",
+        "source_id": "S6",
+        "field": "release_date",
+        "text": "Jan 25, 2018",
+        "confidence": "high",
+        "claim_type": "source-backed",
+        "source_agent": "storefront-agent",
+        "source_type": "store",
+        "evidence_level": "tier-1",
+        "verified_status": "fetched"
+      }
+    ],
+    "summary": [
+      {
+        "id": "C15",
+        "source_id": "S7",
+        "field": "summary",
+        "text": "Celeste is a 2018 platform video game developed and published by indie studio Maddy Makes Games. The player controls the player character Madeline, a young woman with anxiety and depression, who endeavors to climb Celeste Mountain, a fictional version of Mount Celeste. During her climb, she encounters several characters, including a personification of her self-doubt nicknamed \"Badeline\", who attempts to stop her from reaching the mountain's summit.",
+        "confidence": "medium",
+        "claim_type": "source-backed",
+        "source_agent": "gameplay-evidence-agent",
+        "source_type": "reference",
+        "evidence_level": "tier-3",
+        "verified_status": "fetched"
+      }
+    ]
+  },
+  "official_or_store_sources": [
+    {
+      "id": "S1",
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store Search - Celeste",
+      "url": "https://store.steampowered.com/search/?term=Celeste",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S2",
+      "tier": "tier-1",
+      "kind": "official-search",
+      "title": "Official Site Search - Celeste",
+      "url": "https://www.google.com/search?q=Celeste+official+site",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S3",
+      "tier": "tier-2",
+      "kind": "press-search",
+      "title": "Press Kit Search - Celeste",
+      "url": "https://www.google.com/search?q=Celeste+press+kit+developer",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S6",
+      "claims": [
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14"
+      ],
+      "tier": "tier-1",
+      "kind": "store",
+      "title": "Steam Store - Celeste",
+      "url": "https://store.steampowered.com/app/504230/",
+      "status": "fetched",
+      "steam_appid": 504230,
+      "matched_query": "Celeste"
+    }
+  ],
+  "community_or_reference_sources": [
+    {
+      "id": "S4",
+      "tier": "tier-3",
+      "kind": "reference-search",
+      "title": "Public Wiki Search - Celeste",
+      "url": "https://www.google.com/search?q=Celeste+game+wiki",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S5",
+      "tier": "tier-3",
+      "kind": "database-search",
+      "title": "MobyGames Search - Celeste",
+      "url": "https://www.mobygames.com/search/?q=Celeste",
+      "status": "candidate",
+      "claims": []
+    },
+    {
+      "id": "S7",
+      "claims": [
+        "C15"
+      ],
+      "tier": "tier-3",
+      "kind": "reference",
+      "title": "Wikipedia - Celeste (video game)",
+      "url": "https://en.wikipedia.org/wiki/Celeste_(video_game)",
+      "status": "fetched",
+      "matched_query": "Celeste"
+    }
+  ],
+  "user_notes": [
+    {
+      "id": "U1",
+      "tier": "user-note",
+      "kind": "user-note",
+      "title": "User Raw Note",
+      "url": "",
+      "status": "provided",
+      "claims": [
+        "C1"
+      ]
+    }
+  ]
+}

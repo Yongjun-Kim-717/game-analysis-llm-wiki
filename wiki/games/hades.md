@@ -30,7 +30,24 @@ tags:
 last_reviewed: 2026-06-11
 quality_score: 91
 quality_level: strong
+source_agents:
+  - research-orchestrator
+  - official-source-agent
+  - storefront-agent
+  - community-agent
+  - gameplay-evidence-agent
+  - cross-check-agent
+  - synthesis-agent
+source_coverage:
+  - storefront
+  - reference
+  - community
+trust_flags:
+  - candidate-sources-present
 ---
+
+
+
 
 
 
@@ -153,3 +170,29 @@ Defy the god of the dead as you hack and slash out of the Underworld in this rog
 ## 유지보수 메모
 
 - 2026-06-11: Analyze New Game Skill로 초안 생성.
+
+## Source Agent Pool
+
+- execution mode: sequential-local-runner
+- cost strategy: No parallel LLM calls; skill-runner applies source agent specs in sequence.
+
+- Research Orchestrator: completed - Resolved title, aliases, scope, and selected source agents.
+- Official Source Agent: completed - 0 confirmed source(s), 2 candidate source(s), 2 claim(s).
+- Storefront Agent: completed - 2 confirmed source(s), 1 candidate source(s), 3 claim(s).
+- Community Agent: completed - 0 confirmed source(s), 1 candidate source(s), 1 claim(s).
+- Gameplay Evidence Agent: completed - 1 confirmed source(s), 2 candidate source(s), 3 claim(s).
+- Cross-Check Agent: needs-review - Found 1 evidence gap(s).
+- Synthesis Agent: completed - Prepared source perspectives for wiki synthesis.
+
+## Evidence Coverage
+
+- official: missing
+- storefront: covered
+- reference: covered
+- community: covered
+- critic: missing
+
+## Source Conflicts and Gaps
+
+- candidate-sources-present
+

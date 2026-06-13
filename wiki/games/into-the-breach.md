@@ -24,7 +24,24 @@ tags:
 last_reviewed: 2026-06-11
 quality_score: 42
 quality_level: weak
+source_agents:
+  - research-orchestrator
+  - official-source-agent
+  - storefront-agent
+  - community-agent
+  - gameplay-evidence-agent
+  - cross-check-agent
+  - synthesis-agent
+source_coverage:
+trust_flags:
+  - needs-official-or-store-source
+  - needs-player-experience-signal
+  - needs-reference-or-gameplay-evidence
+  - candidate-sources-present
 ---
+
+
+
 
 
 
@@ -117,3 +134,32 @@ Turn-based tactics roguelite focused on grid positioning, perfect information, a
 ## 유지보수 메모
 
 - 2026-06-10: Analyze New Game Skill로 초안 생성.
+
+## Source Agent Pool
+
+- execution mode: sequential-local-runner
+- cost strategy: No parallel LLM calls; skill-runner applies source agent specs in sequence.
+
+- Research Orchestrator: completed - Resolved title, aliases, scope, and selected source agents.
+- Official Source Agent: completed - 0 confirmed source(s), 2 candidate source(s), 2 claim(s).
+- Storefront Agent: completed - 0 confirmed source(s), 1 candidate source(s), 1 claim(s).
+- Community Agent: needs-player-signal - 0 confirmed source(s), 0 candidate source(s), 0 claim(s).
+- Gameplay Evidence Agent: completed - 0 confirmed source(s), 2 candidate source(s), 2 claim(s).
+- Cross-Check Agent: needs-review - Found 4 evidence gap(s).
+- Synthesis Agent: completed - Prepared source perspectives for wiki synthesis.
+
+## Evidence Coverage
+
+- official: missing
+- storefront: missing
+- reference: missing
+- community: missing
+- critic: missing
+
+## Source Conflicts and Gaps
+
+- needs-official-or-store-source
+- needs-player-experience-signal
+- needs-reference-or-gameplay-evidence
+- candidate-sources-present
+

@@ -91,3 +91,31 @@
 - 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
 
 - 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
+
+- 2026-06-13: [Wiki Builder Agent] Celeste evidence page written through MCP write tool
+
+- 2026-06-13: [Wiki Builder Agent] Celeste game page written through MCP write tool
+
+- 2026-06-13: [Quality Reviewer Agent] Celeste game page rewritten with analysis quality report
+
+- 2026-06-13: [Analyze New Game] Celeste 분석 파이프라인 실행: wiki/games/celeste.md 생성
+
+- 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json
+
+- 2026-06-13: [Source Coverage Backfill] Balatro source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Celeste source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Hades source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Into the Breach source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] MapleStory source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Slay the Spire source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Subnautica 2 source coverage metadata backfilled
+
+- 2026-06-13: [Source Coverage Backfill] Source Coverage Backfill executed: 7 game pages updated
+
+- 2026-06-13: [Maintenance Sweep] Maintenance Sweep 실행: maintenance/sweep-2026-06-13.json

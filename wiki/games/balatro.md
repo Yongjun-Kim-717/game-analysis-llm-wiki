@@ -29,7 +29,23 @@ tags:
 last_reviewed: 2026-06-11
 quality_score: 30
 quality_level: seed
+source_agents:
+  - research-orchestrator
+  - official-source-agent
+  - storefront-agent
+  - community-agent
+  - gameplay-evidence-agent
+  - cross-check-agent
+  - synthesis-agent
+source_coverage:
+  - storefront
+trust_flags:
+  - needs-player-experience-signal
+  - needs-reference-or-gameplay-evidence
 ---
+
+
+
 
 
 
@@ -121,3 +137,30 @@ Poker roguelike deckbuilder with joker synergies and score-based run progression
 ## 유지보수 메모
 
 - 2026-06-10: Analyze New Game Skill로 초안 생성.
+
+## Source Agent Pool
+
+- execution mode: sequential-local-runner
+- cost strategy: No parallel LLM calls; skill-runner applies source agent specs in sequence.
+
+- Research Orchestrator: completed - Resolved title, aliases, scope, and selected source agents.
+- Official Source Agent: candidate-only - 0 confirmed source(s), 0 candidate source(s), 0 claim(s).
+- Storefront Agent: completed - 1 confirmed source(s), 0 candidate source(s), 1 claim(s).
+- Community Agent: needs-player-signal - 0 confirmed source(s), 0 candidate source(s), 0 claim(s).
+- Gameplay Evidence Agent: candidate-only - 0 confirmed source(s), 0 candidate source(s), 0 claim(s).
+- Cross-Check Agent: needs-review - Found 2 evidence gap(s).
+- Synthesis Agent: completed - Prepared source perspectives for wiki synthesis.
+
+## Evidence Coverage
+
+- official: missing
+- storefront: covered
+- reference: missing
+- community: missing
+- critic: missing
+
+## Source Conflicts and Gaps
+
+- needs-player-experience-signal
+- needs-reference-or-gameplay-evidence
+

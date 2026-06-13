@@ -1,0 +1,44 @@
+{
+  "agent": "Game Analyst Agent",
+  "core_loop": [
+    "실시간 조작 전투",
+    "전투 보상 선택",
+    "숙련 기반 반복"
+  ],
+  "core_loop_confidence": [
+    {
+      "step": "실시간 조작 전투",
+      "confidence": "high",
+      "source_ids": [
+        "S6"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "전투 보상 선택",
+      "confidence": "high",
+      "source_ids": [
+        "S6"
+      ],
+      "rationale": "source-backed inference"
+    },
+    {
+      "step": "숙련 기반 반복",
+      "confidence": "low",
+      "source_ids": [],
+      "rationale": "default loop inference"
+    }
+  ],
+  "mechanics": [
+    "action-combat"
+  ],
+  "tags": [
+    "action",
+    "adventure",
+    "indie"
+  ],
+  "fun_factor_hypothesis": "입력 자료 기준으로 반복 선택, 보상, 시스템 조합에서 재미가 발생한다고 가정한다.",
+  "differentiation_notes": [
+    "추가 비교 분석 필요"
+  ]
+}

@@ -28,7 +28,24 @@ similar_games:
 last_reviewed: 2026-06-11
 quality_score: 34
 quality_level: seed
+source_agents:
+  - research-orchestrator
+  - official-source-agent
+  - storefront-agent
+  - community-agent
+  - gameplay-evidence-agent
+  - cross-check-agent
+  - synthesis-agent
+source_coverage:
+  - official
+  - storefront
+  - reference
+trust_flags:
+  - needs-player-experience-signal
 ---
+
+
+
 
 
 
@@ -169,4 +186,29 @@ Roguelike Deckbuilder 장르는 다음 관습을 가진다.
 ## 유지보수 메모
 
 현재 문서는 공개 자료와 장르 지식 기반 분석이다. 추후 직접 플레이 로그와 run별 의사결정 기록을 추가하면 evidence level을 `high`로 올릴 수 있다.
+
+## Source Agent Pool
+
+- execution mode: sequential-local-runner
+- cost strategy: No parallel LLM calls; skill-runner applies source agent specs in sequence.
+
+- Research Orchestrator: completed - Resolved title, aliases, scope, and selected source agents.
+- Official Source Agent: completed - 1 confirmed source(s), 0 candidate source(s), 1 claim(s).
+- Storefront Agent: completed - 1 confirmed source(s), 0 candidate source(s), 1 claim(s).
+- Community Agent: needs-player-signal - 0 confirmed source(s), 0 candidate source(s), 0 claim(s).
+- Gameplay Evidence Agent: completed - 2 confirmed source(s), 0 candidate source(s), 2 claim(s).
+- Cross-Check Agent: needs-review - Found 1 evidence gap(s).
+- Synthesis Agent: completed - Prepared source perspectives for wiki synthesis.
+
+## Evidence Coverage
+
+- official: covered
+- storefront: covered
+- reference: covered
+- community: missing
+- critic: missing
+
+## Source Conflicts and Gaps
+
+- needs-player-experience-signal
 

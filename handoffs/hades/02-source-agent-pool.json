@@ -1,0 +1,151 @@
+{
+  "agent_pool": "Spec-Based Agent Pool",
+  "execution_mode": "sequential-local-runner",
+  "cost_strategy": "No parallel LLM calls; skill-runner applies source agent specs in sequence.",
+  "selected_agents": [
+    "research-orchestrator",
+    "official-source-agent",
+    "storefront-agent",
+    "community-agent",
+    "gameplay-evidence-agent",
+    "cross-check-agent",
+    "synthesis-agent"
+  ],
+  "skipped_agents": [
+    {
+      "id": "critic-review-agent",
+      "reason": "Not required for current scope or no matching source candidates."
+    }
+  ],
+  "coverage": {
+    "official": false,
+    "storefront": true,
+    "reference": true,
+    "community": true,
+    "critic": false
+  },
+  "trust_flags": [
+    "candidate-sources-present"
+  ],
+  "steps": [
+    {
+      "id": "research-orchestrator",
+      "agent": "Research Orchestrator",
+      "spec": "agents/source-pool/research-orchestrator.md",
+      "status": "completed",
+      "summary": "Resolved title, aliases, scope, and selected source agents.",
+      "metrics": {
+        "label": "Research Orchestrator",
+        "spec": "agents/source-pool/research-orchestrator.md",
+        "required": true,
+        "sources": 0,
+        "confirmed_sources": 0,
+        "fetched_sources": 0,
+        "candidate_sources": 0,
+        "claims": 0
+      }
+    },
+    {
+      "id": "official-source-agent",
+      "agent": "Official Source Agent",
+      "spec": "agents/source-pool/official-source-agent.md",
+      "status": "completed",
+      "summary": "0 confirmed source(s), 2 candidate source(s), 2 claim(s).",
+      "metrics": {
+        "label": "Official Source Agent",
+        "spec": "agents/source-pool/official-source-agent.md",
+        "required": true,
+        "sources": 2,
+        "confirmed_sources": 0,
+        "fetched_sources": 0,
+        "candidate_sources": 2,
+        "claims": 2
+      }
+    },
+    {
+      "id": "storefront-agent",
+      "agent": "Storefront Agent",
+      "spec": "agents/source-pool/storefront-agent.md",
+      "status": "completed",
+      "summary": "2 confirmed source(s), 1 candidate source(s), 3 claim(s).",
+      "metrics": {
+        "label": "Storefront Agent",
+        "spec": "agents/source-pool/storefront-agent.md",
+        "required": true,
+        "sources": 3,
+        "confirmed_sources": 2,
+        "fetched_sources": 2,
+        "candidate_sources": 1,
+        "claims": 3
+      }
+    },
+    {
+      "id": "community-agent",
+      "agent": "Community Agent",
+      "spec": "agents/source-pool/community-agent.md",
+      "status": "completed",
+      "summary": "0 confirmed source(s), 1 candidate source(s), 1 claim(s).",
+      "metrics": {
+        "label": "Community Agent",
+        "spec": "agents/source-pool/community-agent.md",
+        "required": false,
+        "sources": 1,
+        "confirmed_sources": 0,
+        "fetched_sources": 0,
+        "candidate_sources": 1,
+        "claims": 1
+      }
+    },
+    {
+      "id": "gameplay-evidence-agent",
+      "agent": "Gameplay Evidence Agent",
+      "spec": "agents/source-pool/gameplay-evidence-agent.md",
+      "status": "completed",
+      "summary": "1 confirmed source(s), 2 candidate source(s), 3 claim(s).",
+      "metrics": {
+        "label": "Gameplay Evidence Agent",
+        "spec": "agents/source-pool/gameplay-evidence-agent.md",
+        "required": true,
+        "sources": 3,
+        "confirmed_sources": 1,
+        "fetched_sources": 1,
+        "candidate_sources": 2,
+        "claims": 3
+      }
+    },
+    {
+      "id": "cross-check-agent",
+      "agent": "Cross-Check Agent",
+      "spec": "agents/source-pool/cross-check-agent.md",
+      "status": "needs-review",
+      "summary": "Found 1 evidence gap(s).",
+      "metrics": {
+        "label": "Cross-Check Agent",
+        "spec": "agents/source-pool/cross-check-agent.md",
+        "required": true,
+        "sources": 0,
+        "confirmed_sources": 0,
+        "fetched_sources": 0,
+        "candidate_sources": 0,
+        "claims": 0
+      }
+    },
+    {
+      "id": "synthesis-agent",
+      "agent": "Synthesis Agent",
+      "spec": "agents/source-pool/synthesis-agent.md",
+      "status": "completed",
+      "summary": "Prepared source perspectives for wiki synthesis.",
+      "metrics": {
+        "label": "Synthesis Agent",
+        "spec": "agents/source-pool/synthesis-agent.md",
+        "required": true,
+        "sources": 0,
+        "confirmed_sources": 0,
+        "fetched_sources": 0,
+        "candidate_sources": 0,
+        "claims": 0
+      }
+    }
+  ]
+}

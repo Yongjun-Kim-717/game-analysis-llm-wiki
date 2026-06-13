@@ -1,0 +1,15 @@
+{
+  "agent": "Revision Agent",
+  "game": "Celeste",
+  "status": "needs-revision",
+  "actions": [
+    {
+      "reason": "no player-experience signal",
+      "action": "run Broad scope with reviews enabled or add curated review/community source URLs"
+    },
+    {
+      "reason": "thin core loop",
+      "action": "add play observation or design notes to improve core loop analysis"
+    }
+  ]
+}

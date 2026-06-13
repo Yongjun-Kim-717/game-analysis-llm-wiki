@@ -1,0 +1,158 @@
+{
+  "date": "2026-06-13",
+  "updated_pages": 7,
+  "results": [
+    {
+      "title": "Balatro",
+      "path": "wiki/games/balatro.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "storefront"
+      ],
+      "trust_flags": [
+        "needs-player-experience-signal",
+        "needs-reference-or-gameplay-evidence"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "Celeste",
+      "path": "wiki/games/celeste.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "storefront",
+        "reference"
+      ],
+      "trust_flags": [
+        "needs-player-experience-signal",
+        "candidate-sources-present"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "Hades",
+      "path": "wiki/games/hades.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "storefront",
+        "reference",
+        "community"
+      ],
+      "trust_flags": [
+        "candidate-sources-present"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "Into the Breach",
+      "path": "wiki/games/into-the-breach.md",
+      "validation_ok": true,
+      "source_coverage": [],
+      "trust_flags": [
+        "needs-official-or-store-source",
+        "needs-player-experience-signal",
+        "needs-reference-or-gameplay-evidence",
+        "candidate-sources-present"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "MapleStory",
+      "path": "wiki/games/maplestory.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "storefront",
+        "reference"
+      ],
+      "trust_flags": [
+        "needs-player-experience-signal",
+        "candidate-sources-present"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "Slay the Spire",
+      "path": "wiki/games/slay-the-spire.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "official",
+        "storefront",
+        "reference"
+      ],
+      "trust_flags": [
+        "needs-player-experience-signal"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    },
+    {
+      "title": "Subnautica 2",
+      "path": "wiki/games/subnautica-2.md",
+      "validation_ok": true,
+      "source_coverage": [
+        "storefront",
+        "reference",
+        "community"
+      ],
+      "trust_flags": [
+        "candidate-sources-present"
+      ],
+      "selected_agents": [
+        "research-orchestrator",
+        "official-source-agent",
+        "storefront-agent",
+        "community-agent",
+        "gameplay-evidence-agent",
+        "cross-check-agent",
+        "synthesis-agent"
+      ]
+    }
+  ]
+}

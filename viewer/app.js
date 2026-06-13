@@ -339,6 +339,15 @@ function renderSkillForm() {
     `;
     return;
   }
+  if (skill === "source-coverage-backfill") {
+    skillFormEl.innerHTML = `
+      <label class="field-label">Target Page</label>
+      <input name="path" value="${escapeHtml(selectedPath)}" placeholder="Leave empty to update all active game pages" />
+      <label class="check-row"><input type="checkbox" name="includeDeprecated" value="true" /> Include deprecated / archived pages</label>
+      <p class="assistant-note">Existing game pages keep their text, while source_agents, source_coverage, trust_flags, and source-agent handoffs are backfilled from current evidence.</p>
+    `;
+    return;
+  }
 }
 
 function readSkillForm() {

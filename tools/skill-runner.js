@@ -506,6 +506,70 @@ function coverageFrontmatter(trace) {
     .map(([key]) => key);
 }
 
+function collectUrls(markdown) {
+  return [...new Set([...String(markdown || "").matchAll(/https?:\/\/[^\s)]+/g)].map((match) => match[0]))];
+}
+
+function sourceStatusForExistingUrl(url) {
+  const lower = String(url || "").toLowerCase();
+  if (/google\.com\/search|store\.steampowered\.com\/search|mobygames\.com\/search/.test(lower)) return "candidate";
+  return "fetched";
+}
+
+function buildResearchFromExistingEvidence({ page, gameMarkdown, evidenceMarkdown }) {
+  const title = getFrontMatterScalar(gameMarkdown, "title") || page.title;
+  const slug = getFrontMatterScalar(gameMarkdown, "game_slug") || page.slug || slugify(title);
+  const aliases = getFrontMatterList(gameMarkdown, "aliases");
+  const genre = getFrontMatterList(gameMarkdown, "genre");
+  const platform = getFrontMatterList(gameMarkdown, "platform");
+  const tags = getFrontMatterList(gameMarkdown, "tags");
+  const research = {
+    agent: "Source Coverage Backfill",
+    game: title,
+    original_game: getFrontMatterScalar(gameMarkdown, "original_query") || title,
+    aliases,
+    slug,
+    scope: "backfill-existing-evidence",
+    allowed_tiers: ["tier-1", "tier-2", "tier-3", "tier-4"],
+    sources: [],
+    claims: [],
+    unresolved_questions: []
+  };
+
+  let sourceIndex = 1;
+  for (const url of collectUrls(`${gameMarkdown}\n${evidenceMarkdown}`)) {
+    const status = sourceStatusForExistingUrl(url);
+    const source = addResearchSource(research, {
+      id: `S${sourceIndex++}`,
+      tier: tierForUrl(url),
+      kind: kindForUrl(url),
+      title: url,
+      url,
+      status
+    });
+    addResearchClaim(research, source.id, "source_presence", url, status === "fetched" ? "medium" : "low", status === "fetched" ? "source-backed" : "candidate");
+  }
+
+  if (!research.sources.length) {
+    const source = addResearchSource(research, {
+      id: "U1",
+      tier: "user-note",
+      kind: "user-note",
+      title: "Existing wiki page",
+      url: "",
+      status: "provided"
+    });
+    addResearchClaim(research, source.id, "raw_note", "Existing page has no parseable source URL.", "low", "user-note");
+    research.unresolved_questions.push("No parseable source URL found in existing game or evidence page.");
+  }
+
+  for (const item of genre) addResearchClaim(research, "U1", "genre", item, "medium", "user-note");
+  for (const item of platform) addResearchClaim(research, "U1", "platform", item, "medium", "user-note");
+  for (const item of tags) addResearchClaim(research, "U1", "tag", item, "medium", "user-note");
+
+  return research;
+}
+
 function buildSearchTargets(searchTerms, scope) {
   const base = [];
   for (const term of searchTerms) {
@@ -1416,6 +1480,71 @@ export function qualityBackfill(input = {}) {
   };
 }
 
+export function sourceCoverageBackfill(input = {}) {
+  const requestedPath = String(input.path || input.pagePath || "").trim().replaceAll("\\", "/");
+  const includeDeprecated = input.includeDeprecated === true || input.includeDeprecated === "true";
+  const pages = wikiSearch({ query: "", filters: ["game-analysis"] }).results
+    .filter((page) => !requestedPath || page.path === requestedPath || page.slug === requestedPath)
+    .filter((page) => includeDeprecated || !["deprecated", "archived"].includes(page.status));
+  if (requestedPath && !pages.length) throw new Error(`No active game page found for source coverage backfill: ${requestedPath}`);
+
+  const results = [];
+  const artifacts = [];
+  for (const page of pages) {
+    const abs = path.join(ROOT, page.path);
+    const current = fs.readFileSync(abs, "utf8");
+    const slug = getFrontMatterScalar(current, "game_slug") || page.slug || slugify(page.title);
+    const evidencePath = path.join(ROOT, "wiki", "evidence", `${slug}-sources.md`);
+    const evidenceMarkdown = fs.existsSync(evidencePath) ? fs.readFileSync(evidencePath, "utf8") : "";
+    const research = buildResearchFromExistingEvidence({ page, gameMarkdown: current, evidenceMarkdown });
+    const trace = buildAgentPoolTrace({
+      research,
+      scope: input.scope || "backfill",
+      includeReviews: true
+    });
+    const next = addSourceAgentPoolSections(current, trace);
+    const update = wikiUpdatePage({
+      path: page.path,
+      markdown: next,
+      actor: "Source Coverage Backfill",
+      summary: `${page.title} source coverage metadata backfilled`
+    });
+
+    const handoffDir = path.join(ROOT, "handoffs", slug);
+    const tracePath = path.join(handoffDir, "02-source-agent-pool.json");
+    writeJson(tracePath, trace);
+
+    const coverage = coverageFrontmatter(trace);
+    const trustFlags = trace.trust_flags || [];
+    results.push({
+      title: page.title,
+      path: page.path,
+      validation_ok: update.validation.ok,
+      source_coverage: coverage,
+      trust_flags: trustFlags,
+      selected_agents: trace.selected_agents
+    });
+    artifacts.push(page.path, rel(tracePath));
+  }
+
+  const report = {
+    date: today(),
+    updated_pages: results.length,
+    results
+  };
+  const reportPath = path.join(ROOT, "maintenance", `source-coverage-backfill-${today()}.json`);
+  writeJson(reportPath, report);
+  appendJournal(`Source Coverage Backfill executed: ${results.length} game pages updated`, "Source Coverage Backfill");
+  artifacts.push(rel(reportPath));
+  return {
+    ok: results.every((item) => item.validation_ok),
+    skill: "source-coverage-backfill",
+    log: ["Cross-Check Agent backfilled source coverage metadata", "Maintenance Agent wrote source coverage report"],
+    artifacts: [...new Set(artifacts)],
+    report
+  };
+}
+
 export async function runSkill(input = {}) {
   const skill = input.skill || input.name;
   if (skill === "analyze-new-game") return await analyzeNewGame(input);
@@ -1430,6 +1559,7 @@ export async function runSkill(input = {}) {
   if (skill === "refresh-evidence") return await refreshEvidence(input);
   if (skill === "maintenance-sweep") return maintenanceSweep(input);
   if (skill === "quality-backfill") return qualityBackfill(input);
+  if (skill === "source-coverage-backfill") return sourceCoverageBackfill(input);
   throw new Error(`Unknown skill: ${skill}`);
 }
 
