@@ -52,6 +52,9 @@ trust_flags:
 
 
 
+
+
+
 # Balatro
 
 ## 기본 정보
